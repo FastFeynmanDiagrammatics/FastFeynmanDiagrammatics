@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\begin{document}
+\section{UnitTest: Nambu formalism}
+We consider a quadratic hamiltonian of the form
+$$
+\hat{H} = \hat{H}_0 + \hat{H}_a - \sum_\sigma \mu_\sigma \; N_\sigma
+$$
+where
+$$
+\hat{H}_0  = -\sum_{\sigma,\mathbf{x},j} t_{\sigma} \;c^\dagger_{\sigma}(\mathbf{x}+\mathbf{e}_j)\;c_{\sigma}(\mathbf{x}) +h.c.
+$$
+$$
+\hat{H}_a  = -\Delta^*\sum_{\mathbf{x}}  \;c_{\downarrow}(\mathbf{x})\;c_{\uparrow}(\mathbf{x}) +h.c.
+$$
+We define the Nambu vector
+$$
+\phi_{\mathbf{k}} = \left(\begin{array}{c}c_{\mathbf{k},\uparrow} \\ c_{-\mathbf{k},\downarrow}^\dagger\end{array}\right)
+  $$
+  One has
+  $$
+  \hat{H} = \sum_{\mathbf{k}} \phi_{i\omega_n,\mathbf{k}}^\dagger \;M_{\mathbf{k}}^{-1}\;\phi_{i\omega_n\mathbf{k}}+ \text{const.}
+$$
+where
+$$
+M_{i\omega_n,\mathbf{k}}^{-1}=\left(\begin{array}{cc}-i\omega_n+\xi_{\mathbf{k},\uparrow} & \Delta\\
+\Delta^* & -i\omega_n+\zeta\, \xi_{-\mathbf{k},\downarrow}\end{array}\right)
+$$
+so that
+$$
+M_{i\omega_n,\mathbf{k}}=\frac{1}{(i\omega_n-\zeta\;\xi_{-\mathbf{k},\dowarrow})(-i\omega_n+\xi_{-\mathbf{k},\downarrow})+|\Delta|^2}\left(\begin{array}{cc}i\omega_n-\zeta\xi_{-\mathbf{k},\downarrow} & \Delta\\
+\Delta^* &  i\omega_n-\xi_{\mathbf{k},\uparrow}\end{array}\right)
+$$
+
+
+\end{document}

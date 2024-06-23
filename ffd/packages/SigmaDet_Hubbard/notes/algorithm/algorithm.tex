@@ -1,0 +1,59 @@
+\section{Algorithms}
+
+\begin{algorithm}
+\caption{\texttt{compute\_Xi}}
+\begin{algorithmic}
+  \STATE{{\bf Input}: $G_0[j,k][[\xi]]$}
+  \STATE{$Z[[\xi]]\gets 1$}
+  \FOR {$S\in$ \texttt{Range}$(1, 2^n)$}
+  \FOR{$j,k\in$ \texttt{Range}$(|S|)$}
+  \STATE{$g_0[j,k]\gets G_0[S_j, S_k][[\xi]]$\texttt{.restrict\_to\_set}$(2^n-1-S)$}
+  \ENDFOR
+  \STATE{\texttt{[I, det] = Inverse\_and\_Determinant(g\_0)}}
+  \STATE{\texttt{det2}$[[\xi]]$ $\gets$ \texttt{det}$[[\xi]]$ \texttt{det}$[[\xi]]$}
+  \STATE{$Z[[\xi]] \gets Z[[\xi]] +\xi^S$ \texttt{det2}$[[\xi]]$\texttt{.extend\_to\_set}$(2^n-1-S,n)$}
+  \FOR{$j,k\in$ \texttt{Range}$(|S|)$}
+  \STATE{$\Xi[S_j,S_k][[\xi]] \gets \Xi[S_j,S_k][[\xi]]+\xi^S (I[j,k][[\xi]]\;$\texttt{det2}$[[\xi]])$\texttt{.extend\_to\_set}$(2^n-1-S,n)$}
+  \ENDFOR
+  \ENDFOR
+\RETURN $\Xi[j,k][[\xi]]/Z[[\xi]]$
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+  \caption{\texttt{compute\_rho}}
+\begin{algorithmic}
+  \STATE{{\bf Input}: $G_0[j,k][[\xi]],\;\Xi[j,k][[\xi]]$}
+  \FOR{$j,k\in$ \texttt{Range(n)}}
+  \IF{$j\neq k$}
+  \FOR{$l\in$ \texttt{Range(n)}}
+  \STATE{$\rho[j,k][[\xi]] \gets \rho[j,k][[\xi]] + G_0[j,l][[\xi]]\;\Xi[l,k][[\xi]]$}
+  \ENDFOR
+  \ENDIF
+  \ENDFOR
+\RETURN $\rho[j,k][[\xi]]$
+\end{algorithmic}
+\end{algorithm}
+
+
+\begin{algorithm}
+  \caption{\texttt{compute\_Sigma}}
+  \begin{algorithmic}
+    \STATE{{\bf Input:} $\Xi[j,k][[\xi]],\;\rho[j,k][[\xi]]$}
+    \FOR{$j,k\in$ \texttt{Range(n)}}
+    \STATE{$\Sigma[j,k][[\xi]] \gets \Xi[j,k][[\xi]]$}
+    \ENDFOR
+    \FOR{$S\in$ \texttt{Range}$(1, 2^n)$}
+    \FOR{$j,k\in$ \texttt{Range(n)}$,\;j\neq k$}
+    \FOR{$l\in$ \texttt{Range(n)}}
+    \FOR{$S'\subsetneq S$}
+    \STATE{$\Sigma[j,k][S] \gets \Sigma[j,k][S] - \Sigma[j,l][S']\;\rho[l,k][S\setminus S']$}
+    \ENDFOR
+    \ENDFOR
+    \ENDFOR
+    \ENDFOR
+\RETURN $\Sigma[j,k][[\xi]]$
+\end{algorithmic}
+\end{algorithm}
+

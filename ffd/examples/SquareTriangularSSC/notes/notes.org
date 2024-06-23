@@ -1,0 +1,135 @@
+#+TITLE: Canonical self-energy
+# * Fixing the density with the alpha shift (fist attempt)
+# Let us define $M$ as the $G_0$ where the diagonal is set to zero (mean-field choice).
+# Let us define
+# \begin{equation}\label{}
+# P_M(S) := \det_{j,k\in S} \, M_{j,k}
+# \end{equation}
+# \begin{equation}\label{}
+# Z(S):= (-1)^{|S|}\,\left(P_M(S)\right)^2
+# \end{equation}
+# For $j\in S$, we introduce
+# \begin{equation}\label{}
+# A_j(S) := (-1)^{|S|-1}\,P_M(S)\,P_M(S\setminus \{j\})
+# \end{equation}
+# One also has (we include the mean field shift of the chemical potential into the interaction term)
+# \begin{equation}\label{}
+# A_j(\{j\})=0
+# \end{equation}
+# We define
+# \begin{equation}\label{}
+# n_j[[\xi]] = \frac{A_j[[\xi]]}{Z[[\xi]]}
+# \end{equation}
+# We now add an $\alpha$ on the diagonal of the $M$ matrix
+# \begin{equation}\label{}
+# M_{j,k}(\alpha) = M_{j,k} +\alpha\;\delta_{j,k}
+# \end{equation}
+# We define
+# \begin{equation}\label{}
+# Z(\alpha, S) := (-1)^{|S|}\,\left(P_{M(\alpha)}(S)\right)^2
+# \end{equation}
+# We also define a modified $M$ matrix where we don't add $\alpha$ to the $l$ diagonal
+# \begin{equation}\label{}
+# M_{j,k}(\alpha, l) = M_{j,k} +\alpha\;\delta_{j,k} \delta_{j\neq l}
+# \end{equation}
+# \begin{equation}\label{}
+# A_j(\alpha, S) := (-1)^{|S|-1}\,P_{M(\alpha,\,j)}(S)\,P_{M(\alpha)}(S\setminus \{j\})
+# \end{equation}
+# We are also going to define
+# \begin{equation}\label{}
+# \tilde{A}_j(\alpha, S) := 
+# (-1)^{|S|-1}\,
+# P_{M(\alpha)}(S)\,
+# P_{M(\alpha)}(S\setminus \{j\}) = 
+# A_j(\alpha,S) + \alpha\;Z(S\setminus \{j\})
+# \end{equation}
+# One has
+# \begin{equation}\label{}
+# P_{M(\alpha)}(S) = 
+# \sum_{S'\subseteq S} 
+# P_{M}(S')\,
+# \alpha^{|S\setminus S'|}=
+# \sum_{k=0}^{|S|}\hat{P}_{M}(S,k) \,\alpha^k
+# \end{equation}
+# where $\hat{f}(S,k)$ is the Ranked Zeta transform of the function $f(S)$:
+# \begin{equation}\label{}
+# \hat{f}(S,k):=
+# \sum_{S'\subseteq S,\,|S|=k}
+# f(S')	
+# \end{equation}
+# We define
+# \begin{equation}\label{}
+# n(\alpha)[[\xi] := \frac{1}{\text{order}}
+# \frac{\sum_j A_j(\alpha)[[\xi]]}{Z[[\xi]]}
+# =\frac{1}{\text{order}}
+# \frac{\sum_j \tilde{A}_j[[\xi]]}{Z[[\xi]]} 
+# - \alpha
+# \end{equation}
+# We can write
+# \begin{equation}\label{}
+# n(\alpha)[[\xi]] = \sum_{S} n(\alpha, S)\, \xi^S
+# \end{equation}
+# We need to impose (the first order is zero already by this choice)
+# \begin{equation}\label{}
+# \alpha = \alpha[[\xi]] \qquad \text{such that} \qquad n(\alpha[[\xi]])[[\xi]] = 0 
+# \end{equation}
+# We will iterate over the cardinality of the set $S$ of $n(S)=0$, $k$.
+
+# * Fixing the density with the alpha shift (second attempt)
+# Let us define
+# \begin{equation}\label{}
+# P=\log \int e^{-S}
+# \end{equation}
+# where $S=S_0+S_int$, and
+# \begin{equation}\label{}
+# S_{int}[[\xi]] = \int \xi(X)\,(n_\downarrow(X) -n_0/2 +\alpha[[\xi]])(n_\uparrow(X) -n_0/2+ \alpha[[\xi]])
+# \end{equation}
+# This corresponds to a chemical potential given by
+# \begin{equation}\label{}
+# \mu[[\xi]] = \mu_0-\int \xi(X) \alpha[[\xi]]
+# \end{equation}
+# One has for $S\neq \emptyset$
+# \begin{equation}\label{}
+# \mu(S)=-\sum_{j\in S} alpha(S\setminus \{j\})
+# \end{equation}
+
+* Fixing the density with the alpha shift
+Let $M$ be a $nxn$ matrix. 
+For $|S|=|S|'$, we define 
+\begin{equation}\label{}
+P_M(S) = \det _{j,k\in S} M_{j,k}
+\end{equation}
+and
+\begin{equation}\label{}
+P_{M;j,k}(S) = 
+\det_{u,\in S\cup \{j\}, v\in S\cup\{k\}} 
+M_{u,v}
+\end{equation}
+Let us consider 
+\begin{equation}\label{}
+\Xi_{j,k}[[\xi]] = \frac{\Xi^{(a)}_{j,k}[[\xi]]}{Z}
+\end{equation}
+where 
+\begin{equation}\label{}
+Z(S)=(-1)^{|S|}\,\left(P_M(S)\right)^2
+\end{equation}
+and
+\begin{equation}\label{}
+\Xi_{j,k}^{(a)}(S)=
+(-1)^{|S|}\,P_M(S)\,P_{M;j,k}(S\setminus\{j,k\})
+\end{equation}
+We now add an $\alpha$ on the diagonal of the $M$ matrix
+\begin{equation}\label{}
+M_{j,k}(\alpha) = M_{j,k} +\alpha\;\delta_{j,k}
+\end{equation}
+One has 
+\begin{equation}\label{}
+P_{M(\alpha)}=\sum_{S'\subseteq S} 
+P_{M}(S\setminus S')\,\alpha^{|S|'}
+\end{equation}
+and
+\begin{equation}\label{}
+P_{M(\alpha);j,k}(S)=\sum_{S'\subseteq S} 
+P_{M;j,k}(S\setminus S')\,\alpha^{|S|'}
+\end{equation}
+ 

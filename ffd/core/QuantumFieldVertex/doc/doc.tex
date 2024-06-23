@@ -1,0 +1,11 @@
+\chapter{\texttt{QuantumFieldVertex/}}
+A \texttt{QuantumFieldVertex} is a \texttt{std::vector<QuantumFieldDot>}. The multiplication of \texttt{QuantumFieldVertex}es produces a \texttt{QuantumFieldVertex}.
+\section{\texttt{QuantumFieldVertex.hpp [ffd::qf\_vertex]}}
+A \texttt{QuantumFieldVertex} is derived from \texttt{std::vector<QuantumFieldDot}.
+\subsection{\texttt{QuantumFieldVertex::Type}}
+The type (in the physical sense, not the computer-science type) may be specified with a \texttt{std::optional<std::variant<int, std::string>>}.
+\subsection{\texttt{QuantumFieldVertex::QuantumFieldVertex(QuantumFieldDot)}}
+It creates a \texttt{QuantumFieldVertex} consisting of one \texttt{QuantumFieldDot}.
+\section{\texttt{operator\_mul.hpp [ffd::user\_space]}}
+\subsection{\texttt{operator*(QuantumFieldVertex, QuantumFieldVertex) }}
+Two \texttt{QuantumFieldVertex} can be multiplied and the result is a \texttt{QuantumFieldVertex}. \texttt{QuantumFieldDot} are simply \texttt{push\_back}ed in the resulting \texttt{QuantumFieldVertex}.

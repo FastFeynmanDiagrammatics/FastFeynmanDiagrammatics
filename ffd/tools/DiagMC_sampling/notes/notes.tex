@@ -1,0 +1,111 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\title{DiagMC sampling}
+\author{\texttt{riccardorossi4@gmail.com}}
+\begin{document}
+\maketitle
+\section{Definitions}
+We consider the problem of computing the integral of a symmetric function of $n$ variables 
+$$
+O_n = \int f_n(\{X_0, \dots, X_{n-1}\})/n!
+$$
+We consider an symmetric ``normalizer'' function (in most cases just $f_{n-k}$) of $n-k$ variables $g_{n-k}(\{X_0,\dots X_{n-k-1}\})/((n-k)!)$. We consider a probability distribution on the space of $n-k$ and $n$ variables such that
+$$
+p(V) =\frac{1}{\mathcal{N}}\frac{|f_n(V)|}{n!}
+$$
+when $|V|=n$ and
+$$
+p(V) =\frac{1}{\mathcal{N}} \frac{|g_{n-k}(V)|}{(n-k)!}
+$$
+when $|V|=n-k$. Then, we can write
+$$
+O_n = \mathcal{N} \int p(V)\; \mathbb{I}_n(V)\; \text{sign}\; f(V) = \mathcal{N}\langle \mathbb{I}_n(V) \;\text{sign}\; f(V)\rangle
+$$
+where $\mathbb{I}_n(V)$ is one when $|V|=n$ and zero otherwise. Let
+$$
+N_{n-k}= \int  \frac{|g_{n-k}(V)|}{(n-k)!} = \mathcal{N} \langle \mathbb{I}_{n-k}\rangle 
+$$
+We can therefore write
+$$
+\frac{O_n}{N_{n-k}} = \frac{\langle \mathbb{I}_n \;\text{sign}\; f\rangle}{\langle \mathbb{I}_{n-k} \rangle} 
+$$
+We also have
+$$
+\frac{N_n}{N_{n-k}} = \frac{\langle \mathbb{I}_n \rangle}{\langle \mathbb{I}_{n-k} \rangle} 
+$$
+\section{The Monte Carlo process}
+Let $V= \{X_0,\dots,X_{n-1}\}$ be a order $n$ configuration. Let $S_k$ be a subset of $V$ of $k$ variables. We define
+$$
+V_S :=V\setminus S
+$$
+$$
+G_S(V) := |g_{n-k}(V_S)|\;\phi_{V_S}(S)
+$$
+where $\phi_{V_S}(S)$ is a probability distribution for every choice of $V_S$: $\phi_{V_S}(S)\ge 0$ and
+$$
+\int_S \phi_{V_S}(S)=1
+$$
+$\phi$ plays the role of the seed function. We also introduce
+$$
+G(V) := \sum_{|S|=k, \;S\subset V}^{n-1} G_S(V)
+$$
+
+\subsection{The heat-bath move}
+We propose the following move (we refer it as the \texttt{heat-bath} move): we choose the configuration $V$ with probability $|f_n(V)|/(|f_n(V)|+G(V))$, and the configuration $V_S$ with probability $G_S(V)/(|f_n(V)|+G(V))$.
+
+\subsection{The creation move}
+Let us suppose that we are in $V_S$. We consider a \texttt{creation} move that creates some set of vertices $S$ with probability distribution $\phi_{V_S}(S)$. We then apply use the \texttt{heat-bath} move to the configuration $V= V_S\cup S$.
+\subsection{The complete Monte Carlo process}
+If we are in a $n$-variable configuration, we perform the \texttt{heat-bath}, and we increment our MonteCarlo clock by one.
+
+If we are in a $(n-1)$-variable configuration, we perform the \texttt{creation} move and right after the \texttt{heat-bath} move, and then we increment the Monte Carlo clock by one.
+\subsection{Detailed balance}
+We consider the configuration space which is given by the order $n$ configuration space and the configuration space of the order $n-k$ cartesian product and a set of $k$ integers $\{j_0,\dots, j_{k-1}\}$ representing the set $S$ of vertices removed from the set $V$.
+We first consider the flux of configurations per unit time from $V\to (V_S,\{j_0,\dots, j_{k-1}\})$ such that $X_{j_l}\in S$. The probability of being in the configuration $V$ is $p(V) =|f_n(V)|/(\mathcal{N}n!)$. From $V$, the probability of going to $(V_S, \{j_0, \dots, j_{k-1}\})$ is
+$$
+p((V_S,\{j_0, \dots, j_{k-1}\})|V)=\frac{ G_S(V)}{|f_n(V)|+G(V)}
+$$
+so that we have
+$$
+\Phi(V \to (V_S,\{j_0, \dots, j_{k-1}\})) = p(V) \;p((V_S,\{j_0, \dots, j_{k-1}\})|V) = \frac{|f_n(V)\;g_{n-k}(V_S)|\;\phi_{V_S}(S)}{\mathcal{N}\;n!\;(|f_n(V)|+G(V))}
+$$
+Let us consider the inverse process $(V_S,\{j_0, \dots, j_{k-1}\})\to V$. The probability of being in $(V_S,\{j_0, \dots, j_{k-1}\})$ is the probability to be at order $n-k$, $p(V_S)=|g_{n-k}(V_j)|/(\mathcal{N}\;(n-k)!)$, divided by the $n!/((n-k)!k!)$ possible choices of the integers $\{j_0,\dots,j_{k-1}\}$, so that $p((V_S,\{j_0, \dots, j_{k-1}\}))= k!|g_{n-k}(V_S)|/(\mathcal{N}\; n!)$. The probability of the \texttt{creation} of $S$ given $V_S$ is $\phi_{V_S}(S)/k!$ (the integration measure contains $1/k!$). The probability of obtaining $V$ with the \texttt{heat-bath} move is $|f_n(V)|/(|f_n(V)|+G(V))$, so that
+$$
+\Phi((V_S,\{j_0, \dots, j_{k-1}\}) \to V) = \frac{k!\;|g_{n-k}(V_S)|}{\mathcal{N}\;n!}\; \frac{\phi_{V_S}(S)}{k!}\;\frac{|f_n(V)|}{|f_n(V)|+G(V)}=\Phi(V\to (V_S,\{j_0, \dots, j_{k-1}\}))
+$$
+therefore we have detailed balance. Let us consider the process $V_{S}\to V_{S'}$ ($S\neq S'$). One has
+$$
+\Phi((V_S, j_S)\to (V_{S'}, j_{S'}))= \frac{k!\,|g_{n-k}(V_S)|}{\mathcal{N}\;n!}\;\frac{\phi_{V_S}(S)}{k!}\;\frac{|g_{n-k}(V_{S'})|\phi_{V_{S'}}(S')}{|f_n(V)|+G(V)} =\Phi((V_{S'}, j_{S'})\to (V_{S}, j_{S}))
+$$
+\subsection{Integrating out the $n$-th order}
+Let us suppose that we are in the configuraton $V_S$ and we have just created a set of vertices $S$. Then, it exists a time $t_n(V)+1\ge 1$ (in number of MC steps) such that we will be back at order $n-k$.  $t_n(V)$ is a stochastic number, and it does not affect in any way what it is happening at order $n-k$. We can therefore imagine of running various MC simulations and averaging over $t_n(V)$. Let $u_n(V) =\frac{|f_n(V)|}{|f_n(V)|+ G(V)}<1$ be the probability of choosing the order $n$. Then one has
+$$
+t_n(V) = u_n(V)+u_n(V)^2+u_n(V)^3...= \frac{u_n(V)}{1-u_n(V)}= \frac{|f_n(V)|}{G(V)}
+$$
+{\it Remark:} This is what we would obtain with the hybridized sampling in the limit where the $\lambda$ parameter is 0.
+
+\subsection{Final algorithm}
+We start from a configuration $V\setminus S$. First, we generate $S$ with the probability distribution $\phi_{V_S}$. Then, we compute $f(V)$ and $t_n(V)$. After this, we generate $S'\subset V, |S'|=k$ with the probability distribution $G_{S'}(V)/G(V)$.
+
+\subsection{1-variable pseudopotential}
+Let us consider the case where $k=1$ first.
+A simple choice for $\phi_{\{j\}}(V)$ is
+$$
+\phi_{\{j\}}(V) = \frac{1}{n}\sum_{m,\,m\neq j} \tilde{V}(X_j,X_m)+\frac{1}{n}\,\tilde{V}(X_j, O)
+$$
+where $O$ is the origin and where the pseudopotential $\tilde{V}$ is normalized to one $\int_Y \tilde{V}(Y,X) = 1$. 
+\subsection{2-variable pseudopotential}
+Let us consider the case where $k=2$.
+A simple choice for $\phi_{\{u,v\}}(V)$ is
+$$
+\phi_{\{u,v\}}(V) = \frac{1}{2}\,\phi_{\{u\}}(V)\;\phi_{\{v\}}(V\setminus\{u\})+\frac{1}{2}\,\phi_{\{u\}}(V\setminus\{v\})\;\phi_{\{v\}}(V)
+$$
+By using
+$$
+\phi_{\{v\}}(V\setminus\{u\})= \frac{n}{n-1}\phi_{\{v\}}(V)-\frac{1}{n-1}\tilde{V}(X_v,X_u)
+$$
+one also has (assuming that $\tilde{V}$ is symmetric)
+$$
+\phi_{\{u,v\}}(V) = \frac{n}{n-1}\phi_{\{u\}}(V)\;\phi_{\{v\}}(V)-\frac{1}{2(n-1)}\left(\phi_{\{u\}}(V)+\phi_{\{v\}}(V)\right)\tilde{V}(X_v,X_u)
+$$
+\end{document}

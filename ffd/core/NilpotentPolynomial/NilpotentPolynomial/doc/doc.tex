@@ -1,0 +1,25 @@
+\chapter{\texttt{NilpotentPolynomial/ [ffd::nilpotent\_polynomial]}}
+The \texttt{NilpotentPolynomial} class implements the arithmetic operations between nilpotent polynomials. Polynomials can be dynamically defined, summed, multiplied, etc. All the files in this folder uses the \texttt{ffd::nilpotent\_polynomial} namespace.
+\section{\texttt{NilpotentPolynomial.hpp}}
+\subsection{\texttt{class NilpotentPolynomial<Field = Real>}}
+We consider a \texttt{NilpotentPolynomial<Field> P}. The coefficient of the polynomial are stored in a \texttt{std::vector<Field>}, and its size can be accessed with \texttt{P.size()}. The coefficients can be accessed by \texttt{P[j]}. \texttt{NotZero} is the predicate {\it ``This is not the zero polynomial''}. \texttt{NotZero}is automatically set to \texttt{true} whenever we call the non-const version of \texttt{P[j]}. The default constructor creates a zero polynomial.
+\section{\texttt{operator\_multiply.hpp}}
+\subsection{\texttt{NilpotentPolynomial::operator*(const NilpotentPolynomial\&)}}
+This member function returns the \texttt{NilpotentPolynomial} obtained by multiplying \texttt{*this} by \texttt{fac\_}. We remind that nilpotentpolynomial multiplication is equivalent to subset convolution:
+$$
+p[V] = \sum_{S\subseteq V} f_1[S]\,f_2[V\setminus S]
+$$
+In order to loop over subsets of a given set \texttt{V} we use the following trick\footnote{Due to F. \v{S}imkovic.}. We start with a binary number \texttt{S} equal to \texttt{V}. At each following step, we update the binary number \texttt{S} with \texttt{(S-1)\&V}, where \texttt{\&} is the AND logical multibit operator. In this way, we generate all the subsets of \texttt{V}, and we can stop when we reach \texttt{S==0}. An identical strategy is used for \texttt{operator/}.
+\section{\texttt{operator\_parentheses.hpp}}
+\subsection{\texttt{NilpotentPolynomial::operator()(BinaryInt)}}
+\texttt{NilpotentPolynomial<Field>::operator()(BinaryInt S\_)} returns a \texttt{NilpotentPolynomial<Field>} restricted to the variables represented in the binary number \texttt{S\_}.
+
+{\it Example:}
+Let $P$ be the NilpotentPolynomial corresponding to
+$$
+P = a+b x_1 +c x_2 +d x_1 x_2
+$$
+Let \texttt{S=0b10} in the binary representation (it is equal to \texttt{S=2} in base ten). Then
+$$
+P(S) = a + c x_1
+$$

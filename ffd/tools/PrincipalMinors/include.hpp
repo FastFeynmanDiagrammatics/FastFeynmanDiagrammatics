@@ -1,0 +1,22 @@
+#include "decl.hpp"
+
+#include "PrincipalMinors.hpp"
+#include "DeterminantPrincipalMinors.hpp"
+#include "PrincipalMinorsLarge.hpp"
+#include "PrincipalMinorsL_old.hpp"
+#include "PrincipalMinors2n.hpp"
+#include "PrincipalMinorsClassic.hpp"
+#include "PermanentPrincipalMinors.hpp"
+#include "PrincipalMinorsBounded.hpp"
+#include "InversePrincipalMinors.hpp"
+#include "LeadingPrincipalMinors.hpp"
+
+// this will probably go
+#include "PrincipalMinors_nopivot.hpp"
+#include "PrincipalMinorsClassic_nopivot.hpp"
+#include "PrincipalMinors2n_nopivot.hpp"
+#include "Gauss_CP.hpp"
+#include "gauss_cp_quad.hpp"
+#include "PrincipalMinors_nopivot_high.hpp"
+#include "PrincipalMinorsSym.hpp"
+#include "gauss.hpp"

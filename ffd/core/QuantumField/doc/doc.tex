@@ -1,0 +1,16 @@
+\chapter{\texttt{QuantumField/ [ffd::quantum\_field]}}
+A \texttt{QuantumField} is the object representing a quantum field like $\bar{\psi}$.
+\section{\texttt{QuantumField.hpp}}
+A \texttt{QuantumField} is derived from \texttt{std::tuple<int, int, bool, bool>}. The elements of the tuple can be accessed by member functions.
+\subsection{\texttt{QuantumField::Dagger()}}
+\texttt{Dagger} is an \texttt{int} that is equal to \texttt{0} for hermitian fields (e.g. phonons or Majoranas), it is equal to \texttt{1} for non-hermitian fields that are ``not-barred'' (e.g. $\psi,\eta$), and it is equal to \texttt{-1} for ``barred'' fields (e.g. $\bar{\psi}, \bar{\eta}$).
+\subsection{\texttt{QuantumField::Component()}}
+\texttt{Component()} is an \texttt{int} that represent the numeric value of the component (e.g. spin).
+\subsection{\texttt{QuantumField::IsFermion()}}
+\texttt{IsFermion()} is equal to \texttt{true} for Majorana and fermionic fields, it is \texttt{false} otherwise.
+\subsection{\texttt{QuantumField::NotNambu()}}
+\texttt{NotNambu()} is equal to \texttt{true} for ``non-Nambu'' fields, and it is equal to \texttt{false} otherwise.
+\subsection{\texttt{QuantumField::QuantumField()}}
+It sets the value of \texttt{NotNambu} to \texttt{true}.
+\subsection{\texttt{Bar(QuantumField)}}
+It sets the value of \texttt{Dagger()} to \texttt{-Dagger()}.

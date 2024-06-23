@@ -1,0 +1,2 @@
+* DONE make it work for non-hypercubic lattices
+  CLOSED: [2019-10-19 Sat 14:54]

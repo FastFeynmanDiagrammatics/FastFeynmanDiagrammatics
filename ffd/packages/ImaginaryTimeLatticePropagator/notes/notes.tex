@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\begin{document}
+\section{General case}
+Let
+$$
+X = (\tau;\mathbf{r},a)
+$$
+where
+$$
+\mathbf{r} = \left(x_0,\dots\right)
+$$
+where $x_0\in\{0,\dots,L_0-1\},\, x_1\in\{0,\dots,L_1-1\}, \dots$ are integer bravais coordinates representing the unit cell considered, and $a$ is an integer representing the atom in the unit cell. Let $\mathbf{R}(\mathbf{r},a)=\mathbb{B}\mathbf{r}+\mathbf{R}_a$ be the function that associates the real-space position of the atom in $\mathbb{R}^n$. Let
+$$
+\mathbf{r}^{(a)} := \mathbb{B}^{-1}\mathbf{R}_a
+$$
+We will consider an element generic term of a quadratic action
+$$
+\sum_{\mathbf{r}}f_{\gamma_0}^{b_0\dagger}(\tau,\mathbf{r}+\mathbf{r}_0+\mathbf{r}^{(a_0)},a_0)\;f_{\gamma_1}^{b_1\dagger}(\tau,\mathbf{r}+\mathbf{r}_1+\mathbf{r}^{(a_1)},a_1)
+$$
+where $b_j\in\{0,1\}$, and $f$ is a fermionic or bosonic field. We write
+$$
+f_\gamma^{b\dagger}(\mathbf{r}, a)=\frac{1}{\prod_j\sqrt{L_j}}\sum_{\mathbf{k}} e^{i\mathbf{k}\cdot(\mathbf{r}+\mathbf{r}^{(a)})}\;f_{(\gamma,a), (1-2b)\mathbf{k}}^{b\dagger}
+$$
+where $\mathbf{k} = (k_0,\dots)$, $k_j = \frac{2\pi u_j}{L_j}$, $u_j\in \left\{-\left\lfloor \frac{L_j-1}{2}\right\rfloor,\dots,\left\lfloor\frac{L_j}{2}\right\rfloor\right\}$. One has
+$$
+\frac{1}{\prod_j L_j}\;\sum_{\mathbf{r}}e^{i(\mathbf{k}_0-\mathbf{k}_1)\cdot\mathbf{r}}=\delta_{\mathbf{k}_0,\mathbf{k}_1}
+$$
+$$
+\frac{1}{\prod_j L_j}\;\sum_{\mathbf{r}}e^{i(\mathbf{k}_0+\mathbf{k}_1)\cdot\mathbf{r}}=\delta_{\mathbf{k}_0,-\mathbf{k}_1}
+$$
+so that one has (defining $\mathbf{r}_j'=\mathbf{r}_j+\mathbf{r}^{(a_j)}$)
+$$
+\sum_{\mathbf{r}}f_{\gamma_0}^{b_0\dagger}(\tau,\mathbf{r}+\mathbf{r}_0',a_0)\,f_{\gamma_1}^{b_1\dagger}(\tau,\mathbf{r}+\mathbf{r}_1',a_1)=\sum_{\mathbf{k}}e^{i\mathbf{k}\cdot(\mathbf{r}_0'-\mathbf{r}_1')}\;f_{(\gamma_0,a_0),(1-2b_0)\mathbf{k}}^{b_0\dagger}\;f_{(\gamma_1,a_1),(2b_1-1)\mathbf{k}}^{b_1\dagger}
+$$
+We introduce for $\mathbf{k}\neq -\mathbf{k}$
+$$
+\mathbf{v}_{\mathbf{k};(\gamma,a,b)}=f_{(\gamma,a),(1-2b)\mathbf{k}}^{b\dagger}
+$$
+so that a term of the form presented above, gives a contribution to $H$ as
+$$
+\left(H_{\mathbf{k}}\right)_{(\gamma_0,a_0,1-b_0),(\gamma_1,a_1,b_1)}\;\;\; += \;\;\;e^{-i\mathbf{k}\cdot(\mathbf{r}_0'-\mathbf{r}_1')}
+$$
+$$
+\left(H_{\mathbf{k}}\right)_{(\gamma_1,a_1,1-b_1), (\gamma_0,a_0,b_0)}\;\;\; += \;\;\;\zeta\;e^{i\mathbf{k}\cdot(\mathbf{r}_0'-\mathbf{r}_1')}
+$$
+If the hamiltonian is non-anomalous, one can just consider half of it (a quarter actually) $\left(H_{\mathbf{k}}\right)_{(\gamma_0, a_0,0),(\gamma_1, a_1,0)}$.
+
+We introduce for $0<\tau<\beta$ and 
+$$
+G_{(\gamma_0,a_0),(\gamma_1,a_1)}^{(b_0,b_1)}(\tau;\mathbf{r}) = -\langle f_{\gamma_0}^{b_0\dagger}(\tau,\mathbf{r},a_0)\,f_{\gamma_1}^{(1-b_1)\dagger}(0,\mathbf{0}, a_1)\rangle 
+$$
+We write for the (reduced) block to which $\gamma_0$ and $\gamma_1$ belong
+$$
+\mathbf{H}_{\mathbf{k}}=\sum_{u=0}^{\text{blocksize}-1}\; E_{\mathbf{k},u}\;|v_{\mathbf{k},u}\rangle\langle v_{\mathbf{k},u}| 
+$$
+
+\begin{itemize}
+\item Let us consider first the case of a non-anomalous block. Then
+$$
+G_{(\gamma_0,a_0),(\gamma_1,a_1)}^{(0,0)}(\tau;\mathbf{r})=-\langle f_{\gamma_0}(\tau,\mathbf{r},a_0)\,f_{\gamma_1}^{\dagger}(0,\mathbf{0}, a_1)\rangle =\frac{-1}{\prod_j L_j}\sum_{\mathbf{k}}e^{i\mathbf{k}\cdot(\mathbf{r}+\mathbf{r}_{a_0}-\mathbf{r}_{a_1})}\;\left\langle f_{(\gamma_0,a_0),\mathbf{k}}(\tau)\;f^\dagger_{(\gamma_1,a_1),\mathbf{k}}\right\rangle
+$$
+$$
+G_{(\gamma_0,a_0),(\gamma_1,a_1)}^{(0,0)}(\tau;\mathbf{r})=\frac{-1}{2\,\prod_j L_j}\sum_{\mathbf{k}}e^{i\mathbf{k}\cdot(\mathbf{r}+\mathbf{r}_{a_0}-\mathbf{r}_{a_1})} \sum_u g_{\zeta}(E_{\mathbf{k},u}, \tau)\; \left(v_{\mathbf{k},u}\right)_{(\gamma_1,a_1)}^*\; \left(v_{\mathbf{k},u}\right)_{(\gamma_0,a_0)}
+$$
+where
+$$
+g_{-1}(E, \tau) = \frac{e^{(\beta/2-\tau) E}}{\cosh(\beta E/2)}
+$$
+\item General case
+  $$
+  G_{(\gamma_0,a_0),(\gamma_1,a_1)}^{(b_0,b_1)}(\tau;\mathbf{r})=\frac{-1}{\prod_j L_j}\sum_{\mathbf{k}}e^{i\mathbf{k}\cdot(\mathbf{r}+\mathbf{r}_{a_0}-\mathbf{r}_{a_1})}\;\left\langle f^{b0\dagger}_{(\gamma_0,a_0),(1-2b_0)\mathbf{k}}(\tau)\;f^{(1-b_1)\dagger}_{(\gamma_1,a_1),(2b_1-1)\mathbf{k}}\right\rangle
+$$
+$$
+G_{(\gamma_0,a_0),(\gamma_1,a_1)}^{(b_0,b_1)}(\tau;\mathbf{r})=\frac{-1}{2\,\prod_j L_j}\sum_{\mathbf{k}}e^{i\mathbf{k}\cdot(\mathbf{r}+\mathbf{r}_{a_0}-\mathbf{r}_{a_1})} \sum_u g_\zeta(E_{\mathbf{k},u}, \tau)\; \left(v_{\mathbf{k},u}\right)_{(\gamma_1,a_1,b_1)}^*\; \left(v_{\mathbf{k},u}\right)_{(\gamma_0,a_0,b_0)}
+$$
+\item Real particles: we sum over $b_0, b_1$ and we divide by two.
+\end{itemize}
+
+\end{document}

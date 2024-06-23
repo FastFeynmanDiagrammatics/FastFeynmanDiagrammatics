@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts}
+\begin{document}
+We consider the following function
+$$
+I_{[0,x]}(\tau_1,\tau_2) = \int_0^x d\tau\;f(\tau) \;g(\tau_1-\tau) \;h(\tau_2-\tau)
+$$
+We are interested in computing the integral for $x=\beta$.
+We assume that
+$$
+g(\beta+\tau) = \zeta_g \;g(\tau),\qquad h(\beta+\tau) = \zeta_h\;h(\tau)
+$$
+If $0<\tau_1<\tau_2<\beta$, we can write
+$$
+I_{[0,\beta]}=I_{[0,\tau_1]}+I_{[\tau_1,\tau_2]}+I_{[\tau_2,\beta]}
+$$
+and
+$$
+I_{[0,\tau_1]}(\tau_1,\tau_2) = \int_0^{\tau_1}\;f(\tau) \;g(\tau_1-\tau) \;h(\tau_2-\tau)
+$$
+$$
+I_{[\tau_1,\tau_2]}(\tau_1,\tau_2) = \zeta_g\int_{\tau_1}^{\tau_2}\;f(\tau) \;g(\beta-(\tau-\tau_1)) \;h(\tau_2-\tau)
+$$
+$$
+I_{[\tau_2,\beta]}(\tau_1,\tau_2) = \zeta_g\zeta_h\int_{\tau_2}^{\beta}\;f(\tau) \;g(\beta-(\tau-\tau_1)) \;h(\beta-(\tau-\tau_2))
+$$
+\section{Fast version}
+For fermionic convolutions, $I(\tau_1,\tau_2)$ is non-analytic when $\tau_1=\tau_2$. For this reason, we compute it exactly for $\tau_1\le \tau_2$, and we compute the analytic continuation of this function otherwise. In this way the Chebyshev polynomial will converge much (much!) faster. In practice we use the above formula for all $\tau_1$ and $\tau_2$. If $g\neq h$, we need to evaluate the convolution two times and switch $g$ and $h$, if $g=h$ then $I$ is symmetric in $\tau_1$ and $\tau_2$ and we just need it to sort $\tau_1$ and $\tau_2$ in increasing order.
+\end{document}

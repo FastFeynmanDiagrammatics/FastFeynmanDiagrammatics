@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\begin{document}
+\section{Diagonalizing a 2x2 real-symmetric matrix}
+Let
+$$
+S = \left(\begin{array}{cc} S_{00} & S_{01}\\ S_{10}&S_{11}\end{array}\right)
+$$
+where $S_{jk}\in\mathbb{R}$ and 
+$$
+S_{jk} = S_{kj}
+$$
+Let
+$$
+R_\theta := \left(\begin{array}{cc} \cos\theta&-\sin\theta\\ \sin\theta&\cos\theta \end{array}\right)
+$$
+and
+$$
+\Lambda = \left(\begin{array}{cc}\lambda_0 & 0\\ 0 & \lambda_1\\ \end{array}\right)
+$$
+where $\lambda_j\in\mathbb{R}$.
+One has
+$$
+R_\theta^{-1}= R_{-\theta}
+$$
+and
+$$
+R_{\theta}\Lambda R_{\theta}^{-1} = \left(\begin{array}{cc} \cos\theta&-\sin\theta\\ \sin\theta&\cos\theta \end{array}\right)\left(\begin{array}{cc} \lambda_0\cos\theta&\lambda_0\sin\theta\\ -\lambda_1\sin\theta&\lambda_1\cos\theta \end{array}\right)=\left(\begin{array}{cc} \lambda_0\cos^2\theta+\lambda_1\sin^2\theta&(\lambda_0-\lambda_1)\sin\theta\cos\theta\\ (\lambda_0-\lambda_1)\sin\theta\cos\theta& \lambda_1\cos^2\theta+\lambda_0\sin^2\theta\end{array}\right)
+$$
+so that we have
+$$
+X = \frac{2S_{01}}{S_{00}-S_{11}}=\frac{2\sin\theta\cos\theta}{\cos^2\theta-\sin^2\theta} = \tan(2\theta)
+$$
+We apply this formula if $|2S_{01}|<|S_{11}-S_00|$. Otherwise, we shift $\theta$ by $\pm \pi/4$.
+\section{Diagonalizing a 2x2 hermitian matrix}
+Let
+$$
+H = \left(\begin{array}{cc} H_{00} & H_{01}\\ H_{10}&H_{11}\end{array}\right)
+$$
+where $H_{jk}\in\mathbb{R}$ and 
+$$
+H_{jk} = H_{kj}^*
+$$
+Let
+$$
+P_{\phi} = \text{diag}\left(\exp(i\phi/2),\exp(-i\phi/2)\right)
+$$
+Let
+$$
+H_{01} = |H_{01}| e^{i\phi}
+$$
+One has
+$$
+P_{\phi}^{-1} \;H\;P_{\phi} = S
+$$
+where $S$ is a symmetric real matrix.
+\section{General case}
+We consider an hermitian matrix H. 
+
+
+
+
+\end{document}

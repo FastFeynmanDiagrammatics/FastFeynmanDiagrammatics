@@ -1,0 +1,10 @@
+{
+	"jd": {
+	"A complex vector": [[1, 1], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+	"a vector": [0.1, 0.2, 0.3, 0.3],
+	"another value": 1,
+	"copy": 1,
+	"some value": 1
+},
+	"some other stuff": "aaa"
+}

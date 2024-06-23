@@ -1,0 +1,28 @@
+\chapter{\texttt{QuantumFieldProduct\_Dot/}}
+A \texttt{QuantumFieldProduct} is a product of \texttt{QuantumField}s. A \texttt{QuantumFieldDot} is composed of a \texttt{QuantumFieldProduct} and a space \texttt{Position} (representing the position of the fields in the product).
+\section{\texttt{QuantumFieldDot.hpp [ffd::qf\_dot]}}
+A \texttt{QuantumFieldDot} is derived from \texttt{std::vector<QuantumField>}, whose elements represent a product of \texttt{QuantumField} with the same space-time \texttt{Position}. It has an \texttt{std::any} variable representing the space \texttt{Position} of the fields. The mathematical notation for a \texttt{QuantumFieldDot} is, e.g., something like $(\psi_1 \psi_2 \psi_{-1})(X)$.
+\section{\texttt{QuantumFieldProduct.hpp [ffd::qf\_product]}}
+A \texttt{QuantumFieldProduct} is derived from \texttt{std::vector<QuantumField>}, whose elements represent a product of \texttt{QuantumField} with the same space-time position. Contrarily to a \texttt{QuantumFieldDot}, it has no \texttt{Position} variable. The mathematical notation for a \texttt{QuantumFieldProduct} is, e.g., something like $\psi_1\psi_2\psi_{-1}$. The member \texttt{operator()(std::any)}, accordingly, transform a \texttt{QuantumFieldProduct} into a \texttt{QuantumFieldDot}.
+\section{\texttt{ParticleNotation.hpp [ffd::user\_space]}}
+It provides functions returning the $4$ type of particles we consider.
+\subsection{\texttt{Psi\_(int)}}
+\texttt{Psi\_(int)} returns a fermionic \texttt{QuantumFieldProduct} composed of one \texttt{QuantumField} with the argument as component.
+\subsection{\texttt{Rho\_(int)}}
+\texttt{Rho\_(int)} returns a Majorana \texttt{QuantumFieldProduct} of one element.
+\subsection{\texttt{Phi\_(int)}}
+\texttt{Phi\_(int)} returns a scalar-particle \texttt{QuantumFieldProduct} of one element.
+\subsection{\texttt{Eta\_(int)}}
+\texttt{Eta\_(int)} returns s bosonic \texttt{QuantumFieldProduct} of one element.
+\section{\texttt{operator\_mul.hpp [ffd::user\_space]}}
+\subsection{\texttt{operator*(QuantumFieldProduct, QuantumFieldProduct)}}
+It provides the \texttt{*} operator between two \texttt{QuantumFieldProduct}s, which is a \texttt{QuantumFieldProduct}.
+\section{\texttt{operator\_par.hpp [ffd::qf\_product]}}
+\subsection{\texttt{QuantumFieldProduct::operator()(std::any)}}
+It takes a \texttt{std::any} representing the position of the product of fields, and it returns a \texttt{QuantumFieldDot} composed of the \texttt{QuantumFieldProduct} and the argument as \texttt{Position}.
+\section{\texttt{Bar.hpp [ffd::user\_space]}}
+\subsection{\texttt{Bar(QuantumFieldProduct)}}
+It returns a \texttt{QuantumFieldProduct} representing the hermitian conjugate of the argument.
+\section{\texttt{FlipSpin.hpp [ffd::user\_space]}}
+\subsection{\texttt{FlipSpin(QuantumFieldProduct)}}
+It returns a \texttt{QuantumFieldProduct} representing the argument with opposite values of \texttt{Component()} for each of its \texttt{QuantumField}s.

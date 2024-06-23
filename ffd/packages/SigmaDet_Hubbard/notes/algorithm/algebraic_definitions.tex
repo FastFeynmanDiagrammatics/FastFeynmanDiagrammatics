@@ -1,0 +1,64 @@
+n\section{Algebraic definitions}
+We can write the equation for the self-energy as (for $X_u, X_v\in S$)
+$$
+\Xi_{uv}(S)= \sum_{S'\subsetneq S}\sum_{l=0}^{n-1} \Sigma_{ul}(S') \;\rho_{\;v}^l(S\setminus S') + \Sigma_{uv}(S)
+$$
+Generally speaking, a polynomial $P_{uv}[[\xi]]$ (with two indices down) means that the two indices ``belong'' to $P$, i.e. $P_{uv}(S) = 0$ if $X_u\notin S$ or $X_v\notin S$. A polynomial with one index up does not ``own'' the index: $Q_{\;v}^u(S)=0$ if $X_v\notin S$ or $X_u\in S$.
+$$
+\rho_{\;l}^j(\emptyset) = 0
+$$
+$$
+n_u(\emptyset) = 0
+$$
+For the scheme without tadpoles
+$$
+n_u(\{X_u\})= 0 
+$$
+\subsection{Computing $\Xi$ and $n$}
+It turns out that, for a given matrix going into the polynomial, we can obtain all $\Xi_{uv}$ for every $u,v$ at once.
+
+We consider the sum of diagrams at order $n$ for the partition function:
+$$
+Z(S)=(-1)^n\,\det \mathbb{G}_{\uparrow}\;\det \mathbb{G}_{\downarrow}
+$$
+where $(\mathbb{G}_\sigma)_{jk} = G^{jk}$. We consider
+$$
+z[G_\uparrow]=\det G_\uparrow
+$$
+One has (using Jacobi's determinant formula)
+$$
+\frac{\partial}{\partial G_{\uparrow}^{kj}} \;z[G_\uparrow]=\left(\mathbb{G}_\uparrow^{-1}\right)_{jk}\;\det G_\uparrow
+$$
+and the (non-necessarily connected version of) the density and the $\Xi$ function are
+$$
+\mathring{n}_j(S) = (\mathbb{G}^{-1})_{jj}\, (\det \mathbb{G})^2 (-1)^n
+$$
+$$
+\mathring{\Xi}_{jk}(S) = (\mathbb{G}^{-1})_{jk}\, (\det \mathbb{G})^2 (-1)^n
+$$
+computational effort $n^3 4^n$ (just like $G$). The function \texttt{ffd::inverse\_matrix\_gauss::Inverse\_and\_Determinant} returns the inverse and the determinant of a matrix at the same time. The RDet version is:
+$$
+\mathring{n}_j[[\xi]]= \sum_{S,\, |S|>1}\xi^S\;(\mathbb{G}^{-1}[[\xi]])_{jj}\, (\det \mathbb{G}[[\xi]])^2\,(-1)^{|S|}
+$$
+$$
+\mathring{\Xi}_{jk}[[\xi]] = \sum_S \xi^S(\mathbb{G}^{-1}[[\xi]])_{jk}\, (\det \mathbb{G}[[\xi]])^2\,(-1)^{|S|}
+$$
+One computes the connected versions easily:
+$$
+n_j[[\xi]]=\frac{\mathring{n}_j[[\xi]]}{Z[[\xi]]}
+$$
+$$
+\Xi_{jk}[[\xi]]=\frac{\mathring{\Xi}_{jk}[[\xi]]}{Z[[\xi]]}
+$$
+\subsection{Computing $\rho$ from $\Xi$}
+Once having computed $\Xi_{uv}[[\xi]]$, one can compute $\rho_{jl}[[\xi]]$ from
+$$
+\rho_{\;j}^l[[\xi]]= \sum_{m=0}^{n-1} G_{\text{bare}}^{lm}[[\xi]]\; \Xi_{mj}[[\xi]]
+$$
+computational effort: $n^2\,n\,3^n$.
+\subsection{Computing $\Sigma$}
+One has
+$$
+\Sigma_{uv}[[\xi]] = \Xi_{uv}[[\xi]] - \sum_{l} \Sigma_{ul}[[\xi]] \;\rho_{\;v}^l[[\xi]]
+$$
+computational effort: $n^2\, n \,3^n$.

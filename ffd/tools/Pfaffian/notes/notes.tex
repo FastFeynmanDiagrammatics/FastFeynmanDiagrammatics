@@ -1,0 +1,222 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fullpage}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\title{\texttt{ffd/tools/Pfaffian.hpp}}
+\author{\href{mailto:riccardorossi0@protonmail.com}{riccardorossi0@protonmail.com}}
+\begin{document}
+\maketitle
+\section{Mathematical properties}
+\subsection{Definition}
+Let $A$ be an antisymmetric $2n\times 2n$ matrix. We define
+$$
+\text{Pf}\,A := \int \left(\prod_{j=2n-1}^{0} d\rho_{j}\right)\;e^{\sum_{j<k}A_{jk}\,\rho_j\rho_k}
+$$
+where $\rho_j$ are anticommuting Grassmann variables.
+\subsection{Remark}
+Because of the properties of Grassmann variables, this can also be written
+$$
+\text{Pf}\,A = \left(\prod_{j=2n-1}^{0}\frac{\partial }{\partial \rho_{j}}\right)\prod_{j<k}\left(1+A_{jk}\,\rho_j\rho_k\right)
+$$
+\subsection{Proposition}
+``{\it The pfaffian changes sign every time we exchange a row/column with another row/column}''.\\ \\
+           {\it Proof:}\\
+Let $u<v$. We define $\rho'_j=\rho_j$ for $j\notin \{u,v\}$, $\rho'_u=\rho_v$ and $\rho'_v=\rho_u$. One has
+$$
+\text{Pf}\,A=-\left(\prod_{j=2n-1}^{0}\frac{\partial }{\partial \rho'_{j}}\right)\prod_{j<k}\left(1+A'_{jk}\,\rho_j'\rho'_k\right)
+$$
+where $A'$ is defined by the previous equation. We have $A'_{jk} = A_{jk}$ for $j,k\notin\{u,v\}$. Let us write for $k<u$
+$$
+A_{ku}\rho_k\rho_u=A_{ku}\rho_k'\rho_v'=A_{kv}'\rho_k'\rho_v'
+$$
+so that $A_{ku}=A'_{kv}$ for $k<u$. For $u<k<v$
+$$
+A_{uk}\rho_u\rho_k=A_{uk}\rho_v'\rho_k'=A_{kv}'\rho_k'\rho_v'
+$$
+so that $A_{uk}=-A_{kv}'=A_{vk}$. So that we see that $A_{jk}'=A_{\text{tr}(j)\text{tr(k)}}$, where $\text{tr}$ means transformed. $\square$
+\subsection{Proposition}
+``{\it The pfaffian is multiplied by lambda when we multiply a particular row/column by lambda}''. \\ \\
+{\it Proof:}\\ 
+Let $0\le u\le 2n-1$. We perform  the change of variable $\rho_u=\lambda\,\rho'_u$ for a particular $u$, and $\rho'_j=\rho_j$ for $j\neq u$, one has
+$$
+\text{Pf}\,A = \lambda^{-1} \left(\prod_{j=2n-1}^{0}\frac{\partial }{\partial \rho_{j}'}\right)\prod_{j<k}\left(1+A_{jk}'\,\rho_j'\rho_k'\right)
+$$
+where $A'_{jk}=A_{jk}$ if $j,k\neq u$, and $A_{uj}'=\lambda A_{uj}$, $A_{ju}=\lambda A_{ju}$.
+
+\subsection{Proposition}
+``{\it The pfaffian is invariant under the linear addition of a row-column to another row-column}''\\ \\
+{\it Proof:}\\
+Let $0\le u\le 2n-1$ and $0\le v\le 2n-1$, $u\neq v$. We perform the change of variable $\rho_v=\rho_v'+\lambda \rho_u'$, and $\rho_j' = \rho_j$ for $j\neq v$ . One has
+$$
+\text{Pf}\,A =  \left(\prod_{j=2n-1}^{0}\frac{\partial }{\partial \rho_{j}'}\right)\prod_{j<k}\left(1+A_{jk}'\,\rho_j'\rho_k'\right)
+$$
+For $j,k\notin\{v\}$, one has $A_{jk} = A_{jk}'$. Let $j\notin \{u, v\}$. One has
+$$
+A_{jv}\rho_j\rho_v=A_{jv}\rho_j'\rho_v' + \lambda A_{jv}\rho_j'\rho_u'
+$$
+One also has
+$$
+A_{uv}\rho_u\rho_v = A_{uv}\rho'_u\rho'_v
+$$
+so that one has
+$$
+A_{jk}' = A_{jk}\qquad \text{for}\;\; j,k\notin \{u,v\}
+$$
+$$
+A_{ju}' = A_{ju}+\lambda\,A_{jv},\qquad \text{for}\;\;j\neq v
+$$
+$$
+A_{uv}' = A_{uv}
+$$
+\subsection{Striped-triangular form}
+Suppose that
+$$
+A_{2j, k} = 0 \qquad \text{for}\;\; k>2j+1
+$$
+Then
+$$
+\text{Pf}\;A = \prod_{j=0}^{n-1} A_{2j,2j+1}
+$$
+\section{Algorithm}
+We want to transform the matrix in the striped-triangular form through a series of transformations.
+\subsection{Example: first row}
+We start from the first row. We select the pivot for the first row by choosing the element of the first row of greatest absolute value, and we exchange the two row-column so that the pivot is $A_{01}\neq 0$.
+
+We then multiply the row-column $0$ by $1/A_{01}$, so that $A_{01} = 1$.
+
+We then substract the row-column $1$ to the row-column $2$ times $A_{02}$ in order to eliminate $A_{02}$:
+$$
+A_{j2}' = A_{j2}-A_{02}\,A_{j1}
+$$
+that we can rewrite as
+$$
+A_{02}' = 0,\qquad A_{12}' = A_{12},\qquad A_{2j}' = A_{2j}-A_{02}\,A_{1j} \qquad \text{for}\;\; 3\le j< 2n
+$$
+We perform the same transform to eliminate $A_{0k}$
+$$
+A_{jk}' = A_{jk} - A_{0k}\,A_{j1}
+$$
+so that one has
+$$
+A_{0k}' = 0,\qquad A_{1k}' = A_{1k}
+$$
+$$
+A_{jk}' = A_{jk}+A_{0k}\,A_{1j} \qquad \text{for}\;\; 2\le j <k
+$$
+and
+$$
+A_{kj}' = A_{kj}-A_{0k}\,A_{1j} \qquad \text{for}\;\; k\le j <2n
+$$
+\subsection{General case}
+Suppose that for $0\le m<r< n-1$ one has
+\begin{equation}\label{stripe_property}
+A_{2m, k} = 0 \qquad \text{for}\;\; k>2m+1 
+\end{equation}
+\subsubsection{Proposition}
+Suppose we exchange row-column $u>2r$ with row-column $v>2m$. Then Equation~\eqref{stripe_property} remains true.
+\subsubsection{Proposition}
+Suppose we multiply row-column $u>2r$ by $\lambda$. Then Equation~\eqref{stripe_property} remains true.
+\subsubsection{Proposition}
+Suppose we multiply and add row-column $2r+1$ to row-column $k$ with $k>2r+1$. Then Equation~\eqref{stripe_property} remains true.\\ \\
+{\it Proof:}\\
+One has
+$$
+A_{jk}' = A_{jk} + \lambda\, A_{j,2r+1}
+$$
+For $j=2m < 2r$, one has
+$$
+A_{2j,k}' = A_{2j,k}+\lambda \, A_{2j, 2r+1} = 0
+$$
+\subsection{Choosing the pivot and normalize}
+We choose the pivot between $A_{2r,k}$, $k\ge 2r+1$. We normalize $A_{2r, 2r+1}$ to $1$.
+\subsection{Eliminating $A_{2r, k}$}
+We substract row-column $2r+1$ multiplied by $A_{2r,k}$:
+$$
+A_{jk}' = A_{jk} -A_{2r, k}\, A_{j,2r+1} \qquad j\ge 2r
+$$
+so that one has
+$$
+A_{2r,k}' = 0
+$$
+$$
+A_{j,k}' = A_{j,k} +A_{2r, k}\, A_{2r+1,j} \qquad \text{for}\;\; 2r+2\le j<k
+$$
+$$
+A_{k,j}' = A_{k,j} -A_{2r, k}\, A_{2r+1,j} \qquad \text{for}\;\; k+1\le j<2n
+$$
+\begin{algorithm}
+  \caption{Pfaffian}
+\begin{algorithmic}[1]
+  \State $\text{ret}\gets 1$
+  \For {$r:\; \text{Range}(n-1)$}
+  \If{$\text{max}_{2r+1\le c < 2n}\;|A_{2r,c}| = 0$}
+  \State{\Return 0}
+  \EndIf
+  \State $\text{p}\gets \text{argmax}_{2r+1\le c < 2n}\;|A_{2r,c}|$
+  \If{$\text{p}\neq 2r+1$}
+  \State{$\text{swap}(A_{2r, 2r+1}, A_{2r, p})$}
+  \State{$A_{2r+1, p}\gets -A_{2r+1, p}$}
+  \For{$j:\;\text{Range}(2r+2, p)$}
+  \State{$\text{swap}(A_{2r+1, j}, A_{j,p})$}
+  \State{$(A_{2r+1, j}, A_{j,p})\gets (-A_{2r+1, j}, -A_{j,p})$}
+  \EndFor
+  \For{$j:\;\text{Range}(p+1, 2n)$}
+  \State{$\text{swap}(A_{2r+1, j}, A_{p,j})$}
+  \EndFor
+  \State{$\text{ret}\gets -\text{ret}$}
+  \EndIf
+  \State{$\text{ret} \gets \text{ret}\cdot A_{2r, 2r+1}$}
+  \For{$c:\;\text{Range}(2r+2, 2n)$}
+  \State{$\lambda \gets A_{2r, c}/A_{2r, 2r+1}$}
+  \For{$j:\;\text{Range}(2r+2, c)$}
+  \State{$A_{jc}\gets A_{jc}+\lambda\,A_{2r+1, j}$}
+  \EndFor
+  \For{$j:\;\text{Range}(c+1, 2n)$}
+  \State{$A_{cj}\gets A_{cj}-\lambda\,A_{2r+1, j}$}
+  \EndFor
+  \EndFor
+  \EndFor
+  \State \Return $\text{ret} \cdot A_{2n-2,2n-1}$
+\end{algorithmic}
+\end{algorithm}
+\section{Implementation}
+We assume that $A$ is a generic \texttt{antisymmetric\_matrix\_t} (e.g. \texttt{std::vector}) where the elements on the upper triangular part are stored linearly (e.g. for a $4\times 4$ one has $(A_{01}, A_{02}, A_{03}, A_{12}, A_{13}, A_{23})$). The linealizer function converts two coordinates $(j,k)$, $j<k$, of $A$ into the array position:
+$$
+\texttt{linearize}_n(j,k)=\sum_{l=0}^{j-1}\left(2n-1-l\right) +(k-j-1)=\frac{(4n-(j+1))j}{2} + k -(j+1)
+$$
+The size of the array is equal to
+$$
+\texttt{size}_n = n(2n-1)
+$$
+\section{Exact results}
+\subsection{$0\times 0$}
+$$
+\text{Pf}\,A :=1
+$$
+\subsection{$2\times 2$}
+$$
+\text{Pf}\,A = A_{01}
+$$
+\subsection{$4\times 4$}
+$$
+\text{Pf}\,A = A_{01}\,A_{23}-A_{02}\,A_{13}+A_{03}\,A_{12}
+$$
+\subsection{$6\times 6$}
+\begin{equation*}
+  \begin{split}
+    \text{Pf}\,A &= \left(A_{01}\,A_{23}-A_{02}\,A_{13}+A_{03}\,A_{12}\right)A_{45}+\\
+    &-\left(A_{01}\,A_{24}-A_{02}\,A_{14}+A_{04}\,A_{12}\right)A_{35}+\\
+    &-\left(-A_{01}\,A_{34}-A_{04}\,A_{13}+A_{03}\,A_{14}\right)A_{25}+\\
+    &-\left(A_{04}\,A_{23}+A_{02}\,A_{34}-A_{03}\,A_{24}\right)A_{15}+\\
+    &-\left(-A_{14}\,A_{23}+A_{24}\,A_{13}-A_{34}\,A_{12}\right)A_{05}+\\
+    %% &\left(A_{01}\,A_{25}-A_{02}\,A_{15}+A_{05}\,A_{12}\right)A_{34}+\\
+    %% &\left(-A_{01}\,A_{35}-A_{05}\,A_{13}+A_{03}\,A_{15}\right)A_{24}+\\
+    %% &\left(A_{05}\,A_{23}+A_{02}\,A_{35}-A_{03}\,A_{25}\right)A_{14}+\\
+    %% &\left(-A_{15}\,A_{23}+A_{25}\,A_{13}-A_{35}\,A_{12}\right)A_{04}+\\
+  \end{split}
+  \end{equation*}
+\end{document}

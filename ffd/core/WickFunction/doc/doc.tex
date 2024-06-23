@@ -1,0 +1,25 @@
+\chapter{\texttt{WickFunction/}}
+A \texttt{WickFunction} is a sequence of blocks of \texttt{QuantumFieldVertexDot}s representing a correlation function. The \texttt{QuantumFieldVertexDot}s are stored in a way to make it easy to compute the value of the correlation function by using the Wick theorem.
+\section{\texttt{WickFunction.hpp [ffd::wick\_function]}}
+\subsection{\texttt{class WickFunction}}
+\texttt{WickFunction} is derived from \texttt{std::vector<std::pair<std::vector<QuantumFieldVertexDot, std::optional<std::vector<QuantumFieldVertexDot>>>>}. The outmost \texttt{std::vector} is the sequence of blocks of \texttt{QuantumField}. Then, one can have either two \texttt{std::vector}s of \texttt{QuantumFieldVertexDot} (corresponding to the $\psi/\bar{\psi}$ components of a  non-hermitian block of \texttt{QuantumField}) or only one \texttt{std::vector<QuantumFieldVertexDot>} (hermitian block).
+\subsection{\texttt{WickFunction::WhichBlock}}
+It a \texttt{std::function<int(QuantumField)>} determining to which block a \texttt{QuantumField} belongs to.
+\subsection{\texttt{WickFunction::Sign}}
+It stores the \texttt{Sign} of the permutation needed to transform the \texttt{QuantumField}s inserted in the \texttt{WickFunction} in the sorted representation.
+\subsection{\texttt{WickFunction::BlockNumbers}}
+It is a \texttt{std::vector<int>} that provides the conversion between the block internal storage and the block number determined by \texttt{WhichBlock}.
+\subsection{\texttt{WickFunction::IsFermionicBlock}}
+It a \texttt{std::vector<bool>} answering the question: ``Is the block $j$ fermionic?''
+\subsection{\texttt{WickFunction::WickFunction(WhichBlock\_)}}
+It is a constructor that initializes \texttt{WhichBlock}. The default value for the constructor assigns a different block to different components and statistics.
+\section{\texttt{operator\_mul.hpp [ffd::wick\_function]}}
+\subsection{\texttt{WickFunction::operator*=(\{QuantumFieldVertex, int\})}}
+It inserts the \texttt{QuantumFieldVertex} in the correlation function adding \texttt{QuantumField}s incrementally from the right. It also stores the \texttt{int} position of the \texttt{QuantumFieldVertex} (taken as argument) and the \texttt{int} position of the \texttt{QuantumFieldDot} inside the \texttt{QuantumFieldVertex} and binds it to the \texttt{QuantumField} to build a \texttt{QuantumFieldVertexDot}.
+
+
+
+
+
+
+

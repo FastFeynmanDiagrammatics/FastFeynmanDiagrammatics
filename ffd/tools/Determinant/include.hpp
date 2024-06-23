@@ -1,0 +1,10 @@
+#include "decl.hpp"
+// #include"def.hpp"
+// #include"def2.hpp"
+// #include"def3.hpp"
+#include "def4.hpp"
+
+// #include"def_test.hpp"
+#include "def4_cp.hpp"
+#include "gauss_cp_quad.hpp"
+#include "gauss.hpp"

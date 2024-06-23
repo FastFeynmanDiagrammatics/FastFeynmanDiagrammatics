@@ -1,0 +1,82 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+\section{Known-power structure Richardson extrapolation}
+Let $S_N$ be a sequence. It is assumed that
+$$
+S_{N} = S + \frac{A}{N^\alpha} +O(N^{-\alpha}) 
+$$
+We write
+$$
+\frac{S_{2N} -2^{-\alpha} S_N}{1-2^{-\alpha}} = S + O(N^{-\alpha})
+$$
+Assume we know that the corrections are integer power of $1/N$. Then we let for $j\in\{0, ..., u\}$
+$$
+f_j^{(0)} = S_{2^j}
+$$
+For $k\in\{0,...,u-1\}$, we define for $j\in\{0, ... ,u-k-1\}$
+$$
+f_j^{(k+1)}= \frac{f_{j+1}^{(k)}-2^{-k-1}f_j^{(k)}}{1-2^{-k-1}}
+$$
+and our best estimate for $S$ is $f_0^{(u)}$.
+\section{Unknown-power Richardson extrapolation}
+We consider
+$$
+S_{N} := \sum_{k=-N}^N a_k
+$$
+We consider for $j\in\{1, 2,4\}$
+$$
+S^{(j)}_N := S_{j N} = S +\frac{A\, j^{-\alpha}}{N^{\alpha}}+ O(N^{-\alpha})
+$$
+where $\alpha>0$ is unknown.
+We define for $j\in\{2,4\}$
+$$
+s^{(j)}_N= S_N^{(j)}-S_N^{(j/2)}= \frac{A\,j^{-\alpha} (1-2^{-\alpha})}{N^{\alpha}}+ O(N^{-\alpha})
+$$
+and one has
+$$
+\frac{s_N^{(4)}}{s_N^{(2)}}= 2^{-\alpha}
+$$
+We can therefore write
+$$
+S = \frac{S_N^{(4)}-2^{-\alpha}S_{N}^{(2)}}{1-2^{-\alpha}} = \frac{s_N^{(2)}S_N^{(4)}-s_N^{(4)}S_N^{(2)}}{s_N^{(2)}-s_N^{(4)}}=S_N^{(4)}+\frac{(s_N^{(4)})^2}{s_N^{(2)}-s_N^{(4)}}
+$$
+or
+$$
+S = S_{4N}+\frac{s_{4N}^2}{s_{2N}-s_{4N}}= S_{4N} -\frac{(S_{4N}-S_{2N})^2}{S_N-2S_{2N}+S_{4N}}
+$$
+or in the more symmetric form
+$$
+sd
+$$
+Let
+$$
+f_j^{(0)} = S_{2^j}
+$$
+We introduce
+$$
+f^{(k+1)}_j = f^{(k)}_{j+2} - \frac{(f_{j+2}^{(k)}-f_{j+1}^{(k)})^2}{f_j^{(k)}-2f_{j+1}^{(k)}+f_{j+2}^{(k)}}
+$$
+Let $N=2^{2u+2}$ our highest point. At $k=0$, one has $j\in\{0,...,2u+2\}$ (the size of the array is $2u+3$). The maximal order is $u+1$. The best approximation for the sum is
+$$
+S \approx f^{(u+1)}_0
+$$
+\section{Known-power-exponential structure Richardson extrapolation}
+Let $S_N$ be a sequence. It is assumed that
+$$
+S_{N} = S + \frac{A\, e^{i\theta N}}{N^\alpha} +O(N^{-\alpha}) 
+$$
+We write
+$$
+\frac{S_{2N} -2^{-\alpha} e^{i\theta N}S_N}{1-2^{-\alpha}e^{i\theta N}} = S + O(N^{-\alpha})
+$$
+Assume we know that the corrections are integer power of $e^{i\theta N}/N^k$. Then we let for $j\in\{0, ..., u\}$
+$$
+f_j^{(0)} = S_{2^j}
+$$
+For $k\in\{0,...,u-1\}$, we define for $j\in\{0, ... ,u-k-1\}$
+$$
+f_j^{(k+1)}= \frac{f_{j+1}^{(k)}-2^{-k-1}e^{i\theta 2^{j+k}}f_j^{(k)}}{1-2^{-k-1}e^{i\theta 2^{j+k}}}
+$$
+and our best estimate for $S$ is $f_0^{(u)}$.
+\end{document}

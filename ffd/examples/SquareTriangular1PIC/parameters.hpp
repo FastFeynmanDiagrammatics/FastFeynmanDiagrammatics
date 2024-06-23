@@ -1,0 +1,31 @@
+namespace ffd::user_space::parameters{
+  auto constexpr Beta = 3.;
+  auto constexpr Lx = 8;
+  auto constexpr Ly = Lx;
+  auto constexpr U_norm = 1.0;
+  auto constexpr accumulate_every = 1;
+  auto constexpr ashift_target = 0.1;
+  auto constexpr geometry = square;
+  auto constexpr k_slice = BZ;
+  auto constexpr kill_signal_interval = 10.;
+  auto constexpr n0 = 0.875;
+  auto constexpr n_k_points_max = 2000;
+  auto constexpr omega_begin = 2;
+  auto constexpr omega_end = 6;
+  auto constexpr order = 6;
+  auto constexpr pid_counter = 20;
+  auto constexpr precision_G0 = 1e-10;
+  auto constexpr precision_mu = 1e-12;
+  auto constexpr print_interval = 10.;
+  auto constexpr space_scale = 0.5;
+  auto constexpr t_hopping = 1.*(Lx!=0);
+  auto constexpr thermalization_speed = 0.03;
+  auto constexpr thermalization_time = 5;
+  auto constexpr time_normalization_sector = .1;
+  auto constexpr time_scale = 1.0;
+  auto constexpr time_target_order = 0.8;
+  auto constexpr tprime_hopping = 0.;
+  auto constexpr verbose_file = 2;
+  auto constexpr verbose_stdout = 3;
+} // namespace
+using namespace ffd::user_space::parameters;

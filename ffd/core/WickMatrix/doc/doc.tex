@@ -1,0 +1,20 @@
+\chapter{\texttt{WickMatrix/}}
+A \texttt{WickMatrix<Field>} is a matrix of \texttt{Field} values that can have some particular symmetries. It represent the correlations inside a block of a \texttt{WickFunction}, whose value is computed by a \texttt{FeynmanEdgeMap<Field>}. Depending on the symmetry properties of the \texttt{QuantumField}s of the block, a \texttt{Determinant}, \texttt{Pfaffian}, a \texttt{Permanent} or a \texttt{Hafnian} may be called to compute the value of the block (the implementation of these \texttt{Permutant} functions is outside the scope of \texttt{ffd/core/}).
+\section{\texttt{WickMatrix.hpp [ffd::wick\_matrix]}}
+\subsection{\texttt{class WickMatrix<Field>}}
+A \texttt{WickMatrix} is defined by its \texttt{Field} components, stored in a \texttt{std::vector<Field>}, a \texttt{bool IsFermion} (default value \texttt{true}) and a \texttt{bool NotHermitian} (default value \texttt{true}).
+\section{\texttt{WickMatrixWickMatrix.hpp [ffd::wick\_matrix]}}
+\subsection{\texttt{WickMatrix::WickMatrix()}}
+It does nothing.
+\subsection{\texttt{WickMatrix::WickMatrix(QuantumField, int)}}
+\texttt{WickMatrix(QuantumField const\& Q, int n)} builds a \texttt{WickMatrix} coming from a block with \texttt{n} annihilation operators, of statistics determined by \texttt{Q}. If \texttt{Q} is non-hermitian, it creates a standard $n\times n$ matrix. If \texttt{Q} is hermitian and fermionic, it creates an antisymmetric matrix. If \texttt{Q} is hermitian and non-fermionic, it creates a symmetric matrix.
+\subsection{\texttt{WickMatrix::WickMatrix(QuantumFieldProduct, int)}}
+It calls \texttt{WickMatrix::WickMatrix(QuantumField, int)} with the first component of the \texttt{QuantumFieldProduct}.
+\section{\texttt{operator\_par.hpp [ffd::wick\_matrix]}}
+\subsection{\texttt{WickMatrix::operator()(int, int) const}}
+Let \texttt{WickMatrix M}. \texttt{M(j, k)} returns a copy of the matrix element.
+\subsection{\texttt{WickMatrix::operator()(int, int, const char*)}}
+Let \texttt{WickMatrix M}. \texttt{M(j, k, ''assign'')} returns a reference to the matrix element $(j,k)$. It also check by assertion that the third argument is equal to ``assign''. If the \texttt{WickMatrix} is fermionic and not non-hermitian, the first argument must be smaller than the second (it checks this by assertion [there is an evident problem when one tries to access by reference matrix elements of an antisymmetric matrix, and this is a simple way to avoid this difficulty]).
+\section{\texttt{CreateWickMatrices.hpp [ffd::user\_space]}}
+\subsection{\texttt{CreateWickMatrices(WickFunction, FeynmanEdgeMap)}}
+It returns a \texttt{std::vector<WickMatrix<Field>>}, whose elements represents a block in \texttt{WickFunction}. The elements of a \texttt{WickMatrix<Field>} are computed with a \texttt{FeynmanEdgeMap<Field>}.

@@ -1,0 +1,27 @@
+\chapter{\texttt{QuantumFieldGraph/}}
+A \texttt{QuantumFieldGraph} is a \texttt{std::vector} of \texttt{QuantumFieldVertex}.
+\section{\texttt{QuantumFieldGraph.hpp [ffd::qf\_graph]}}
+\subsection{\texttt{class QuantumFieldGraph}}
+\texttt{QuantumFieldGraph} is derived from \texttt{std::vector<QuantumFieldVertex}. It has a member \texttt{operator|=} to merge \texttt{QuantumFieldGraph}.
+\subsection{\texttt{QuantumFieldGraph::QuantumFieldGraph(QuantumFieldVertex)}}
+It creates a \texttt{QuantumFieldGraph} of one \texttt{QuantumFieldVertex}.
+\subsection{\texttt{QuantumFieldGraph::QuantumFieldGraph(QuantumFieldDot)}}
+It creates a \texttt{QuantumFieldGraph} of one \texttt{QuantumFieldVertex} which is built from one \texttt{QuantumFieldDot}.
+\section{\texttt{operator\_or.hpp}}
+\subsection{\texttt{operator|(QuantumFieldGraph, QuantumFieldGraph) [ffd::user\_space] }}
+The \texttt{operator|} merges two \texttt{QuantumFieldGraph} to obtain a \texttt{QuantumFieldGraph} composed of the \texttt{QuantumFieldVertex}es of the two.
+\subsection{\texttt{QuantumFieldGraph::operator|=(QuantumFieldGraph) [ffd::qf\_graph]}}
+It adds the \texttt{QuantumFieldGraph} to \texttt{*this}.
+\section{\texttt{Iterator.hpp [ffd::qf\_graph]}}
+\subsection{\texttt{class QFGraphIterator}}
+\texttt{QFGraphIterator} is used to loop over \texttt{std::pair<QuantumField,std::pair<int, int>>} (i.e. a \texttt{QuantumFieldVertexDot}, see the \texttt{FeynmanEdge/} chapter), where the second element of the \texttt{std::pair} represent the \texttt{int} positions of a \texttt{QuantumFieldVertex} and a \texttt{QuantumFieldDot} inside a \texttt{QuantumFieldGraph}. The \texttt{QuantumFieldGraph} is taken as a constructor argument.
+\subsection{\texttt{QFGraphIterator::operator++()}}
+It moves the iterator to the next \texttt{QuantumField} inserted in the \texttt{QuantumFieldGraph}.
+\subsection{\texttt{QFGraphIterator::operator+(int)}}
+It applies the \texttt{++} operator the number of times specified by the argument.
+\subsection{\texttt{QFGraphIterator::NotEnd()}}
+It returns \texttt{true} if the iterator is pointing to a \texttt{QuantumField} inside the \texttt{QuantumFieldGraph}, it returns \texttt{false} if it has reached (or passed) the end of the \texttt{QuantumFieldGraph}.
+\subsection{\texttt{QFGraphIterator::operator()()}}
+It returns a \texttt{std::pair<QuantumField, std::pair<int, int>>} (i.e. a \texttt{QuantumFieldVertexDot}, see the \texttt{FeynmanEdge} chapter) representing the \texttt{QuantumField}, the integer position of the \texttt{QuantumFieldVertex} inside the \texttt{QuantumFieldGraph} and the integer position of the \texttt{QuantumFieldDot} inside the \texttt{QuantumFieldVertex} pointed by the \texttt{QFGraphIterator}.
+
+

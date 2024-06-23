@@ -1,0 +1,78 @@
+$$ g_{\omega_n, \omega_m, \omega_l} $$ $$
+f(\tau_0, \tau_1, \tau_2, \tau_3 = 0) =
+\frac{1} {
+  \beta ^ 3
+}
+\sum_{n, m, l} g_ {
+  \omega_n, \omega_m, \omega_l
+}
+\;
+\exp\left(-i(\omega_n\tau_0+\omega_m\tau_1+\omega_l\tau_2)\right)
+$$
+where
+$$
+\omega_n := \frac{\pi(2n+1)}{\beta}
+$$
+and $n, m, l$ go from $-N_\omega$ to $N_\omega$.
+$$
+FFT((a_0, a_1, \dots, a_{N-1})=
+(\sum_{n} a_n, \sum_{n} e^{2\pi i n/N} a_n,\dots,  \sum_{n} e^{2\pi i n(N-1)/N} a_n)=
+(\sum_{n=0}^{N-1} e^{2\pi i kn/N} a_n)_k
+$$
+(we change sign of $n, l,m$)
+$$
+f(\tau_0, \tau_1, \tau_2, \tau_3=0)=
+\frac{1}{
+  \beta ^ 3}\sum_{n=-N_\omega}^{
+  N_\omega}\sum_{m, l}g_{
+  \omega_{-n}, \omega_{-m}, \omega_ { -l }}\;
+e^{2\pi i ((n-1/2)\tau_0+(m-1/2)\tau_1+(l-1/2)\tau_2)/\beta}
+$$
+(we shift $n, l, m$ by $-N_\omega$)
+$$
+f(\tau_0, \tau_1, \tau_2, \tau_3=0)=
+\frac{1}{
+  \beta ^ 3}\sum_{n=0}^{
+  2N_\omega}
+\sum_{m=0}^{
+  2N_\omega}\sum_{l=0}^{2N_\omega}
+g_{
+  \omega_{-n + N_\omega}, \omega_{-m + N_\omega}, \omega_ { -l + N_\omega }}\;
+e^{2\pi i ((n-N_\omega-1/2)\tau_0+(m-N_\omega-1/2)\tau_1+(l-N_\omega-1/2)\tau_2)/\beta}
+$$
+(we take out the constant exponential factors)
+$$
+f(\tau_0, \tau_1, \tau_2, \tau_3=0)=
+\frac{e^{
+  -2\pi i(N_\omega + 1 / 2)(\tau_0 +\tau_1 +\tau_2) /\beta}}{
+  \beta ^ 3}\sum_{n=0}^{
+  2N_\omega}
+\sum_{m=0}^{
+  2N_\omega}\sum_{l=0}^{2N_\omega}
+g_{
+  \omega_{-n + N_\omega}, \omega_{-m + N_\omega}, \omega_ { -l + N_\omega }}\;
+e^{2\pi i(n\tau_0+m\tau_1+l\tau_2)/\beta}
+$$
+If we choose
+$$
+\tau^{(k)} := \frac{\beta\,k}{2N_\omega}
+$$
+$$
+f(\tau_0^{(k_0)}, \tau_1^{(k_1)}, \tau_2^{(k_2)})=
+\frac{e^{
+  -2\pi i(N_\omega + 1 / 2)(\tau_0 +\tau_1 +\tau_2) /\beta}}{
+  \beta ^ 3}
+\sum_{n=0}^{
+  2N_\omega}\sum_{m=0}^{
+  2N_\omega}\sum_{l=0}^{2N_\omega}
+g_{
+  \omega_{-n + N_\omega}, \omega_{-m + N_\omega}, \omega_ { -l + N_\omega }}\;
+e^{2\pi i(n k_0+m k_1+l k_2)/N_\omega} 
+$$
+$$
+f(\tau_0^{(k_0)}, \tau_1^{(k_1)}, \tau_2^{(k_2)})=
+\frac{e^{
+  -2\pi i /\beta(N_\omega + 1 / 2)(\tau_0 ^ {(k_0)} +\tau_1 ^ {(k_1)} +\tau_2 ^
+                                   {(k_2)})}}{\beta^3} 
+FFT(g_{\omega_{-n+N_\omega}, \omega_{-m+N_\omega}, \omega_{-l+N_\omega}})_k
+$$

@@ -1,0 +1,33 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts}
+\begin{document}
+We are interested in computing convolutions:
+$$
+h(x):=\int_{0}^\beta dy\;f(x-y)\;g(y)= (f*g)(x)
+$$
+where $x\in\mathbb{R}$, $f:\mathbb{R}\to \mathbb{C}$, $g:\mathbb{R}\to\mathbb{C}$ such that
+$$
+f(x+\beta) = \zeta\,  f(x),\qquad g(x+\beta) = \zeta\, g(x)
+$$
+Then
+$$
+h(x+\beta)=\zeta\, h(x)
+$$
+We can write
+$$
+(f*g)(x)=\int_0^x dy\;f(x-y)\;g(y)+\zeta\int_x^\beta dy\; f(\beta-(y-x)) \; g(x)
+$$
+{\bf Proposition:}
+$$
+f*g = g*f
+$$
+{\bf Proposition:} If $f$ and $g$ are $n_f$ and $n_g$-th order polynomials, $f*g$ is a polynomial of order $k\le n_f+n_g+1$.\newline
+{\it Proof}: We expand $f(x-y)$ as
+$$
+f(x-y) = \sum_{j=0}^n a_j (x-y)^j = \sum_{j=0}^n b_{n-j}(y) x^j
+$$
+where $b_j(y)$ is a $j$-th order polynomial. The integral $\int_{a}^x b_{n-j}(y)g(y)$ creates a $(n-j+n_g+1)$-th order polynomial in $x$. 
+
+
+
+\end{document}

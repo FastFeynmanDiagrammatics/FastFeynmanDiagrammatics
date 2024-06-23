@@ -1,0 +1,22 @@
+\documentclass{article}
+
+\begin{document}
+We write
+$$
+I=\int_{-1}^1 dt\;f(t)=\int_0^\pi d\theta\,\sin\theta\;f(\cos\theta)
+$$
+where $t=\cos\theta$. We expand $f(\cos\theta)$ in a Fourier series (i.e. a Chebyshev polynomial in $t$)
+$$
+f(\cos\theta) =f_0/2 + \sum_{k=1}^\infty f_j \cos(k\theta)\approx f_0 + 2\sum_{k=1}^N f_j \cos(k\theta)
+$$
+We choose the Chebyshev nodes $\theta_k = \pi(k+1/2)/N$, so that $f_j$ is exactly the Chebyshev coefficient
+$$
+f_j = \frac{2}{N}\sum_{k=0}^{N-1} f(\cos(\pi(k+1/2)/N))\;\cos(\pi j (k+1/2)/N)
+$$
+and one has
+$$
+I = f_0 + \sum_{k=1}^N f_k\int_0^\pi d\theta \;\sin\theta\;\cos(k\theta) =
+f_0- 2\sum_{j=1}^{2j<N} \frac{f_{2j}}{(2j+1)(2j-1)}
+$$
+
+\end{document}

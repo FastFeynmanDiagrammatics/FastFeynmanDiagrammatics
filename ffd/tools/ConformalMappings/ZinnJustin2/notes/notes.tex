@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{amsmath}
+\begin{document}
+We would like to compute
+$$
+I(\tau) := \sum_{n=0}^\infty e^{-i\omega_n \tau}\; a(i\omega_n)
+$$
+where
+$$
+\omega_n  = 2\pi (n+1/2)/\beta
+$$
+The Green's functions can be obtained by $2\text{Re}\;I(\tau)$.
+We introduce the function $f(z)$ for $z\in\mathbb{C}$
+$$
+f(z) := \sum_{n=0}^\infty (-z)^n \; a(i\omega_n)
+$$
+One has
+$$
+I(\tau) = e^{i\pi \tau/\beta} f(-e^{-i2\pi\tau/\beta})
+$$
+The function $f(z)$ is analytic in the open unit disk and it has a branch cut singularity for $z<-1$. For this reason, we introduce the conformal mapping
+$$
+z = \frac{4\,w}{(1-w)^2}
+$$
+One also has
+$$
+z^n = 4^n\, \sum_{k=0}^\infty \frac{(2n)(2n+1)...(2n+k-1)}{k!}\,w^{n+k} = \sum_{k=0}^n b_{n,n+k}\;w^{n+k}
+$$
+so that one has
+$$
+f(z)= f(0)+\sum_{m=1}^\infty w^m \sum_{n=1}^m b_{n, m}\;a_n\;(-1)^n
+$$
+
+\end{document}

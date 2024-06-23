@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\begin{document}
+One has that the Chebyshev polynomial coefficients (\texttt{Coef} in the code) can be obtained as
+$$
+c_{k_x, k_y}:= \frac{4}{2^{n}2^m}\sum_{x=0}^{2^n -1}\, \sum_{y=0}^{2^m-1}\;f_{x,y}\;\cos\left(\frac{\pi(x+1/2)k_x}{2^n}\right)\;\cos\left(\frac{\pi(y+1/2)k_y}{2^m}\right)
+$$
+We define for $(k_x,k_y)\in\{0,\dots, 2^{n+1}-1\}\times\{0,\dots, 2^{m+1}-1\}$
+$$
+\tilde{c}_{k_x, k_y}:=e^{-\pi ik_x/2^{n+1}}e^{-\pi ik_y/2^{m+1}}\;\sum_{x=0}^{2^n-1}\sum_{y=0}^{2^m-1} f_{x,y}\;e^{-2\pi ixk_x/2^{n+1}}\;e^{-2\pi iyk_y/2^{m+1}}
+$$
+If we introduce for $(x, y)\in\{0,\dots,2^n-1\}\times\{0,\dots,2^m-1\}$
+$$
+\tilde{f}_{x,y} = f_{x,y}, \qquad \tilde{f}_{x+2^n,y} = \tilde{f}_{x,y+2^m}=\tilde{f}_{x+2^n, y+2^m} = 0
+$$
+one has that $\tilde{c}$ is proportional to the Fourier transform of $\tilde{f}$:
+$$
+\tilde{c}_{k_x, k_y}=e^{-\pi ik_x/2^{n+1}}e^{-\pi ik_y/2^{m+1}}\;\mathcal{F}[\tilde{f}](k_x, k_y)
+$$
+One has
+$$
+c_{k_x,0}=\frac{4}{2^n \,2^m}\;\text{Re}\; \tilde{c}_{k_x,0}
+$$
+One has for $(k_x, k_y)\in\{0,\dots, 2^n-1\}\times\{1,\dots,2^m-1\}$
+$$
+c_{k_x,k_y}=\frac{2}{2^n \,2^m}\left(\text{Re}\; \tilde{c}_{k_x,k_y}- \text{Re}\; \tilde{c}_{k_x,2^{m+1}-k_y}\right)
+$$
+\end{document}

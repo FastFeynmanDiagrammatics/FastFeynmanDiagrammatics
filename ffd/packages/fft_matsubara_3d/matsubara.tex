@@ -1,0 +1,122 @@
+% Created 2OA021-01-26 Tue 22:33
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{fullpage}
+\author{Riccardo Rossi}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={Riccardo Rossi},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.3)}, 
+ pdflang={English}}
+
+\begin{document}
+
+\tableofcontents
+
+Suppose we have
+\begin{equation}\label{}
+g_{\omega_F, \omega_F'; \omega_B}
+\end{equation}
+where
+\begin{equation}\label{}
+  \omega_F := \frac{\pi(2n_F+1)}{\beta}
+  \end{equation}
+\begin{equation}\label{}
+  \omega_B := \frac{\pi(2n_B)}{\beta}
+  \end{equation}
+The fermionic frequencies indexes go from $(-N_F, \dots, N_F)$, and
+the bosonic frequency $(-N_B, \dots, N_B+1)$ (you need to add zero to
+the $N_B+1$ coefficient if you want to use FFT).
+\begin{equation}
+  f(\tau_F,\tau_F',\tau_B) = \frac{1} { \beta ^ 3 } \sum_{n_F, n_F', n_B} g_
+  { \omega_F, \omega_F', \omega_B } \;
+  \exp\left(-i(\omega_F\tau_F+\omega_F'\tau_F'+\omega_B\tau_B)\right)
+\end{equation}
+\begin{equation}\label{}
+\text{FFT}((a_0, a_1, \dots, a_{N-1}))= (\sum_{n} a_n, \sum_{n}
+e^{2\pi i n/N} a_n,\dots, \sum_{n} e^{2\pi i n(N-1)/N} a_n)=
+(\sum_{n=0}^{N-1} e^{2\pi i kn/N} a_n)_k
+\end{equation}
+ (we change sign of $(n, n', l)$)
+\begin{equation}\label{}
+  f(\tau_F, \tau'_F, \tau_B)=
+  \frac{1}{ \beta ^ 3}\sum_{n_F,n_F',n_B}g_{ -\omega_F,
+  -\omega_F', -\omega_B}\; e^{2\pi i
+  ((n_F-1/2)\tau_F+(n_F'-1/2)\tau_F'+n_B\tau_B)/\beta}
+\end{equation}
+(we shift $(n_F, n_F', n_B)$)
+\begin{equation}\label{}
+  f(\tau_F, \tau'_F, \tau_B)
+  = \frac{1}{ \beta ^ 3}\sum_{n_F=0}^{
+  2N_F} \sum_{n_F'=0}^{ 2N_F}\sum_{n_B=0}^{2N_B+2} g_{ \omega_{F;-n_F + N_F},
+  \omega_{F;-n_F' + N_F}, \omega_{B; -n_B + N_B }}\; e^{2\pi i
+  ((n_F-N_F-1/2)\tau_F+(n_F'-N_F-1/2)\tau_F'+(n_B-N_B)\tau_B)/\beta}
+\end{equation}
+(we take out the constant exponential factors)
+\begin{equation}\label{}
+  \begin{split}
+  &f(\tau_F, \tau'_F, \tau_B)=\\
+    &=\exp(-2i\pi(N_F+1/2)(\tau_F+\tau_F')/\beta
+    -2i\pi(N_B)\tau_B/\beta)
+    )\times \\
+&\times\frac{1}{ \beta ^ 3}\sum_{n_F=0}^{
+  2N_F} \sum_{n_F'=0}^{ 2N_F}\sum_{n_B=0}^{2N_B+2} g_{ \omega_{F;-n_F + N_F},
+  \omega_{F;-n_F' + N_F}, \omega_{B; -n_B + N_B }}\; e^{2\pi i
+      (n_F\tau_F+n_F'\tau_F'+n_B\tau_B)/\beta}
+    \end{split}
+\end{equation}
+If we choose
+\begin{equation}\label{}
+  \tau_F^{(k)} := \frac{\beta\,k}{2N_F}
+\end{equation}
+\begin{equation}\label{}
+  \tau_B^{(k)} := \frac{\beta\,k}{2N_B}
+\end{equation}
+
+\begin{equation}\label{}
+  \begin{split}
+  &f(\tau_F^{(k_F)}, \tau_F^{(k_F')}, \tau_B^{(k_B)})=\\
+      &=\exp(-2i\pi(N_F+1/2)(\tau_F+\tau_F')/\beta
+    -2i\pi(N_B)\tau_B/\beta)
+    )\times \\
+    &\times\frac{1}{ \beta ^ 3}\sum_{n_F=0}^{
+  2N_F} \sum_{n_F'=0}^{ 2N_F}\sum_{n_B=0}^{2N_B+2} g_{ \omega_{F;-n_F + N_F},
+      \omega_{F;-n_F' + N_F}, \omega_{B; -n_B + N_B }}\;
+    e^{2\pi i
+      ((n_F k_F+n_F' k_F')/N_F+n_B k_B/N_B)}
+    \end{split}
+\end{equation}
+\begin{equation}\label{}
+  \begin{split}
+  &f(\tau_F^{(k_F)}, \tau_F^{(k_F')}, \tau_B^{(k_B)})=\\
+      &=\exp(-2i\pi(N_F+1/2)(\tau_F+\tau_F')/\beta
+    -2i\pi(N_B)\tau_B/\beta)
+    )/\beta^3\times \\
+&\text{FFT}(g, (2N_F, 2N_F, 2N_B+2))
+    \end{split}
+\end{equation}
+
+\section{Dual boson vertex}
+\begin{equation}\label{}
+\Gamma_{\omega_F,\omega_F',\omega_B} :=\langle c_{\omega_F} c^\dagger_{\omega_F+\omega_B}
+c^\dagger_{\omega_F'}c_{\omega_F'+\omega_B}\rangle
+\end{equation}
+
+\end{document}

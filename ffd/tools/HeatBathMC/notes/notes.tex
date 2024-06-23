@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage, color}
+\title{Parallel-moves faster-than-the-clock DiagMC}
+\begin{document}
+\author{Riccardo Rossi}
+\maketitle
+\section{Introduction}
+We want to compute integrals of functions of increasing number of variables:
+$$
+I_n := \int_{X_0,\dots,X_{n-1}} f(\{X_0,\dots,X_{n-1}\})
+$$
+where $n\in \{0,1,\dots, N_c\}$ ($N_c$ is the maximal ``calculated'' order).
+\section{Simplified introductory example: a parallel-moves faster-than-the-clock DiagMC between order 3 and 4}
+We consider the following simplified problem: a simple Diagrammatic Monte Carlo between order 3 and order 4 with only add/remove moves. 
+\subsection{Standard DiagMC sampling}
+At order 3 one has an add update which is accepted with a probability given by the standard Metropolis rate. At order 4 one removes one vertex at random and accepts the move with the Metropolis rate.
+\subsection{Parallel moves trick}
+We start at order 3 with three vertices $\{X_0, X_1, X_2\}$. We consider an add move with a certain seed function $p_{\text{seed}}(X|Y)$ that will create a vertex $X_3$. If the move is accepted, when we are at order 4, the only possible move is a remove move that if accepted will get us at order 3 in one of the 4 order 3 configurations $\{X_0,X_1,X_2\}$, $\{X_1,X_2,X_3\}$, $\{X_0, X_2, X_3\}$ and $\{X_0, X_1, X_3\}$. We are therefore led to consider an heat-bath Monte Carlo between all these order 3 configurations and the order 4 configurations, that is, we choose a configuration with a probability which is proportional to the flux of configurations. As an additional improvement we remark that it is possible to sum exactly over all the 4+1 configurations at each Monte Carlo step. We imagine the following process: we imagine to cut all external links to the external configurations for one second (arbitrary unit of virtual time), and we perform a great number of Monte Carlo moves between these configurations: this means that we will spend in each configuration a time which is proportional to the heat bath rate, that is, to the flux of the configuration. After one second, we measure and we let the system evolve towards another set of 4+1 configurations.
+\subsection{Faster-than-the-clock method: how to integrate out order changing updates}
+If we end up at the order 4, the only 
+
+\section{Update at the target order }
+\subsection{Target and maximal order}
+Let $N_t$ such that $0\le N_t\le N_c$. $N_t$ is  our ``target'' order. Let $N_M$ such that $N_M\ge N_c$ and $N_M>N_t$. $N_M$ is our ``maximal'' order.
+\subsection{Creation of vertices from the seed function}
+We consider a seed function $p_{\text{seed}}(X|Y)$ (aka vertex creation function) normalized to one (it is a probability):
+$$
+\int_X p_{\text{seed}}(X|Y)=1
+$$
+We start from a set of vertices $\{X_0,\dots, X_{N_t-1}\}$. We start by adding one vertex by choosing one of the $N_t$ vertices randomly, and then obtain a sample from the seed function. This is equivalent to sample with the probability distribution
+$$
+p_{\text{seed}}(X_{N_t}|\{X_0,\dots,X_{N_t-1}\})=\frac{1}{N_t}\sum_{j=0}^{N_t-1} p_{\text{seed}}(X_{N_t}|X_j)
+$$
+We are going to continue adding vertex by first choosing one of the vertices and adding the new one with the seed function until we have added $N_M-N_t$ vertices:
+$$
+p_{\text{seed}}(X_{N_t+k}|\{X_0,\dots,X_{N_t+k-1}\})=\frac{1}{N_t+k}\sum_{j=0}^{N_t+k-1} p_{\text{seed}}(X_{N_t+k}|X_j)
+$$
+where $k\in\{0,\dots, N_M-N_t-1\}$.
+\subsection{Bridge process and parallel moves}
+We imagine that for one second (completely arbitrary virtual time) our configuration space consists only of the all the possible $\texttt{Binomial}(N_M,N_t)$ subsets of cardinality $N_t$ as the configuration space that can be accessed at this given Monte Carlo step. This configuration space can be thought as arising from add/remove moves, that we propose an infinite number of times in this one second without changing $\{X_0,\dots,X_{N_M-1}\}$. Of course, as always in Monte Carlo we need to consider the probability of being in a configuration times the probability to have propose an update, a quantity called the flux of configurations. Therefore, we will spend in each configuration a time proportional to the flux (that we compute in the next section). After one second, we remove the ``bridge'' between the configurations, we will be in one of these configurations and we propose the creation of a new bridge (i.e. other $N_M-N_t$ vertices). The crucial point to realize is that we can store all the times spent in these configurations, allowing to perform multiple moves in parallel and compute exactly their contribution at each Monte Carlo step.
+
+\subsection{Flux of configurations}
+In the Monte Carlo algorithm we need to balance the flux of configurations in order to impose equilibrium. For a subset $S$ of cardinality $N_t$ of $V=\{X_0,\dots, X_{N_M-1}\}$, we know that the Monte Carlo will spend a time proportional to $|f(S)|$ in this configuration. We need to compute the flux of configurations between the configuration $S$ and the set of $N_M$ vertices $V$. This is simply given by
+$$
+F(V|S) = p_{\text{seed}}(V\setminus S|S)\;|f(S)|
+$$
+We show in the next section how to recursively compute $p_{\text{seed}}(V\setminus S|S)$.
+
+\subsection{Recursive evaluation of the seed function probability}
+One has the equation
+$$
+p_{\text{seed}}(S|S') = \frac{1}{|S|}\sum_{X\in S} p_{\text{seed}}(\{X\}|S')\;p_{\text{seed}}(S\setminus \{X\}|S'\cup \{X\})= \frac{1}{|S||S'|}\sum_{X\in S,X'\in S'} p_{\text{seed}}(X|X')\;p_{\text{seed}}(S\setminus \{X\}|S'\cup \{X\})
+$$
+The interpretation is the following: we first choose what is the last vertex to be added (with probability $1/|S|$) and then we choose to which vertex belongs the seed function (with probability $1/|S'|$).
+
+This equation can be solved recursively from
+$$
+p_{\text{seed}}(\emptyset|U) := 1
+$$
+where $U$ is chosen to be $\{X_0,\dots,X_{n-1}\}$ in the translation-invariant case, and $U=\{X_0,\dots,X_{n-1}\}\cup \{O\}$ in the non-translation-invariant case, where $O$ is the spacetime origin (one could also add more external points if wished). The computational cost to fully evaluate $p_{\text{seed}}$ for every subset is $n^2 2^n$ (we will need the full evaluation for later purposes). A brute force evaluation will result in factorial cost (it is the same type of gain that we obtain from original DiagMC to CDet).
+\section{Other orders measure: faster-than-the-clock Monte Carlo}
+The idea is to virtually perform add/remove moves for a given configuration of vertices $\{X_0,\dots,X_{N_M}\}$ to compute the orders from 0 to the maximal calculated order $N_c$.
+\subsection{Virtual Monte Carlo process between order $N_t$ and order $N_M$}
+For deriving the formulas, we consider the following (virtual) process: we start from a configuration at order $N_t$, $\{X_0,\dots,X_{N_t-1}\}$, and we consider the standard Diagrammatic Monte Carlo \texttt{add} move of $N_M-N_t$ vertices with the seed function (in the same way as before). Instead of using the standard Metropolis rate, we choose the heat-bath rate in order to accept or discard the move. 
+%% \section{Updates at other orders}
+
+%% \section{Heat-bath}
+%% \subsection{Heat-bath faster-than-the-clock}
+%% I have a set of $n$ ``unsealed'' configurations (those we are trying to compute) and a set of $m$ ``sealed'' configurations (the byproduct of the calculation). At one Monte Carlo step, we will decide where to move according to the Heat-bath rrate. If we end up being in the sealed configurations, the only possible update is redoing the Heat-bath between these two sets of configurations. If we end up in the unsealed configurations, we will do another type of update (which is beyond this algorithm).
+
+%% Let us introduce the (signed or even complex) weights of the unsealed configurations as $C_{j}^{(u)}$, and the same for the sealed $C_{j}^{(s)}$. 
+
+%% Let us introduce
+%% $$
+%% C^{(s)} = \sum_{j=0}^{n-1}|C_j^{(s)}|
+%% $$
+%% $$
+%% C^{(u)} = \sum_{j=0}^{m-1}|C_j^{(u)}|
+%% $$
+%% Let us introduce the normalization
+%% $$
+%% \mathcal{N} = C^{(u)}+C^{(s)}
+%% $$
+%% Let us compute the probability of choosing an sealed configuration after one MC step:
+%% $$
+%% p_s =\frac{C^{(s)}}{\mathcal{N}}
+%% $$
+%% The probability of choosing $k$ times the sealed configuration and then choose the unsealed is
+%% $$
+%% p_{k,s}= p_s^k(1-p_s)
+%% $$
+%% We can compute what is the average time that is spent in the sealed configurations as
+%% $$
+%% t_s = \sum_{k=1}^\infty k\,p_{k,s} = \frac{p_s}{1-p_s}
+%% $$
+%% We can compute the average time spent in a sealed configuration as
+%% $$
+%% t_{j,s}= \frac{|C_j^{(s)}|}{C^{(s)}}\;t_s=\frac{1}{1-p_s}\frac{|C_j^{(s)}|}{\mathcal{N}}=\frac{|C_{j}^{(s)}|}{C^{(u)}}
+%% $$
+%% The final unsealed configuration will be chosen with the probability distribution
+%% $$
+%% p_{j,u} = \frac{|C_j^{(u)}|}{C^{(u)}}
+%% $$
+%% \subsection{Heat-bath no-link faster-than-the-clock}
+%% Everything is the same, but we will also store the average time that is spent in the unsealed configurations before measuring. Let us compute what is the average time spent in an unsealed configuration for 1 MC step:
+%% $$
+%% t_{j,u}^{(1)}= \frac{|C_j^{(u)}|}{\mathcal{N}}
+%% $$
+%% and for $k$ MC steps:
+%% $$
+%% t_{j,u}^{(k)}= k\,\frac{|C_j^{(u)}|}{\mathcal{N}}
+%% $$
+%% We can compute the total average time spent in an unsealed configuration as
+%% $$
+%% t_{j,u} = \sum_{k=0}^\infty p_{k,s}\,t_{j,u}^{(k+1)}= t^{(1)}_{j,u}(1-p_s)\sum_{k=0}^\infty(k+1)p_{s}^k = \frac{t_{j,u}^{(1)}}{1-p_s}=\frac{1}{1-p_s}\frac{|C_{j}^{(u)}|}{\mathcal{N}} = \frac{|C_j^{(u)}|}{C^{(u)}}
+%% $$
+%% \section{DiagMC}
+%% We consider an order $n$ configuration. We would like to add $m$ vertices with a chosen vertex creation function
+%% $$
+%% \phi_{\{X_0,\dots,X_{n-1}\}}(\{X_n, X_{n+1}, \dots, X_{m+n-1}\})
+%% $$
+%% Let
+%% $$
+%% V=\{X_0,\dots,X_{n+m-1}\}
+%% $$
+%% We introduce the flux of configurations as
+%% $$
+%% \Phi(S\to V)=|c(S)|\;\phi_{S}(V\setminus S)
+%% $$
+%% We do an heat-bath between all the possible configurations with a weight given by $\Phi$.
+
+%% We store the average time spent in each configuration:
+%% $$
+%% t(S) = \frac{\Phi(S\to V)}{\sum_{S\subset V,\,|S|=n}\Phi(S\to V)}
+%% $$
+%% Our observable $O_n$ for every $S\subset V$, $|S|=n$, will have a MC contribution:
+%% $$
+%% \sum_{S\subset V,\, |S|=n} t(S) \;\frac{O(S)}{|c(S)|}
+%% $$
+%% {\color{blue}\bf
+%%   [THIS NEEDS TO BE PROVEN]
+%% }
+%% \section{How to generate samples from the seeding function}
+%% The probability of generating one vertex $X$ when already $V$ are present is by definition
+%% $$
+%% P(\{X\}|V):=\frac{1}{|V|}\sum_{Y\in V} \phi(X,Y)
+%% $$
+%% When we generate more than one vertex, we consider the following process: we start by adding one vertex with the probability $P(\{X\}|V)$, and we choose to consider $V\cup \{X\}$ the set of new vertices. This means that
+%% $$
+%% P(S|V) = \frac{1}{|S|}\sum_{X\in S} P(\{X\}|V)\;P(S\setminus \{X\}|V\cup \{X\})=\frac{1}{|S|\,|V|}\sum_{X\in S,\,Y\in V} \phi(X,Y)\;P(S\setminus \{X\}|V\cup \{X\})
+%% $$
+%% This equation can be solved recursively from
+%% $$
+%% P(\emptyset|U) := 1
+%% $$
+%% where $U$ is chosen to be $\{X_0,\dots,X_{n-1}\}$ in the translation-invariant case, and $U=\{X_0,\dots,X_{n-1}\}\cup \{O\}$ in the non-translation-invariant case, where $O$ is the spacetime origin.
+\end{document}

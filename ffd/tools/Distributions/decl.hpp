@@ -1,0 +1,5 @@
+namespace ffd::distributions{
+	
+	
+	
+}//namespace

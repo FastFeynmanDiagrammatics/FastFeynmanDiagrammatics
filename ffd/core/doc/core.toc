@@ -1,0 +1,92 @@
+\contentsline {chapter}{\numberline {1}Overview of \texttt {ffd/core/}}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}\texttt {CoreMath/}}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}\texttt {RealComplexNumberRepresentation.hpp} [\texttt {ffd}, \texttt {ffd::user\_space}]}{3}{section.2.1}
+\contentsline {subsection}{\numberline {2.1.1}\texttt {Real}}{3}{subsection.2.1.1}
+\contentsline {subsection}{\numberline {2.1.2}\texttt {Complex}}{3}{subsection.2.1.2}
+\contentsline {section}{\numberline {2.2}\texttt {BinaryNumberRepresentation.hpp [ffd, ffd::user\_space]}}{3}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}\texttt {BinaryInt}}{3}{subsection.2.2.1}
+\contentsline {section}{\numberline {2.3}\texttt {SetTheory.hpp [ffd::set\_theory]}}{3}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}\texttt {CardinalitySet(BinaryInt)}}{3}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}\texttt {VectorOfBinaryDigitsOf(BinaryInt) [ffd::user\_space]}}{4}{subsection.2.3.2}
+\contentsline {chapter}{\numberline {3}\texttt {NilpotentPolynomial/ [ffd::nilpotent\_polynomial]}}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}\texttt {NilpotentPolynomial.hpp}}{5}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}\texttt {class NilpotentPolynomial<Field = Real>}}{5}{subsection.3.1.1}
+\contentsline {section}{\numberline {3.2}\texttt {operator\_multiply.hpp}}{5}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}\texttt {NilpotentPolynomial::operator*(const NilpotentPolynomial\&)}}{5}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}\texttt {operator\_parentheses.hpp}}{6}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}\texttt {NilpotentPolynomial::operator()(BinaryInt)}}{6}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}\texttt {QuantumField/ [ffd::quantum\_field]}}{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}\texttt {QuantumField.hpp}}{7}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}\texttt {QuantumField::Dagger()}}{7}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}\texttt {QuantumField::Component()}}{7}{subsection.4.1.2}
+\contentsline {subsection}{\numberline {4.1.3}\texttt {QuantumField::IsFermion()}}{7}{subsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1.4}\texttt {QuantumField::NotNambu()}}{7}{subsection.4.1.4}
+\contentsline {subsection}{\numberline {4.1.5}\texttt {QuantumField::QuantumField()}}{7}{subsection.4.1.5}
+\contentsline {subsection}{\numberline {4.1.6}\texttt {Bar(QuantumField)}}{8}{subsection.4.1.6}
+\contentsline {chapter}{\numberline {5}\texttt {QuantumFieldProduct\_Dot/}}{9}{chapter.5}
+\contentsline {section}{\numberline {5.1}\texttt {QuantumFieldDot.hpp [ffd::qf\_dot]}}{9}{section.5.1}
+\contentsline {section}{\numberline {5.2}\texttt {QuantumFieldProduct.hpp [ffd::qf\_product]}}{9}{section.5.2}
+\contentsline {section}{\numberline {5.3}\texttt {ParticleNotation.hpp [ffd::user\_space]}}{9}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}\texttt {Psi\_(int)}}{9}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}\texttt {Rho\_(int)}}{10}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}\texttt {Phi\_(int)}}{10}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.4}\texttt {Eta\_(int)}}{10}{subsection.5.3.4}
+\contentsline {section}{\numberline {5.4}\texttt {operator\_mul.hpp [ffd::user\_space]}}{10}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}\texttt {operator*(QuantumFieldProduct, QuantumFieldProduct)}}{10}{subsection.5.4.1}
+\contentsline {section}{\numberline {5.5}\texttt {operator\_par.hpp [ffd::qf\_product]}}{10}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}\texttt {QuantumFieldProduct::operator()(std::any)}}{10}{subsection.5.5.1}
+\contentsline {section}{\numberline {5.6}\texttt {Bar.hpp [ffd::user\_space]}}{10}{section.5.6}
+\contentsline {subsection}{\numberline {5.6.1}\texttt {Bar(QuantumFieldProduct)}}{10}{subsection.5.6.1}
+\contentsline {section}{\numberline {5.7}\texttt {FlipSpin.hpp [ffd::user\_space]}}{10}{section.5.7}
+\contentsline {subsection}{\numberline {5.7.1}\texttt {FlipSpin(QuantumFieldProduct)}}{10}{subsection.5.7.1}
+\contentsline {chapter}{\numberline {6}\texttt {QuantumFieldVertex/}}{11}{chapter.6}
+\contentsline {section}{\numberline {6.1}\texttt {QuantumFieldVertex.hpp [ffd::qf\_vertex]}}{11}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}\texttt {QuantumFieldVertex::Type}}{11}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}\texttt {QuantumFieldVertex::QuantumFieldVertex(QuantumFieldDot)}}{11}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}\texttt {operator\_mul.hpp [ffd::user\_space]}}{11}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}\texttt {operator*(QuantumFieldVertex, QuantumFieldVertex) }}{11}{subsection.6.2.1}
+\contentsline {chapter}{\numberline {7}\texttt {QuantumFieldGraph/}}{12}{chapter.7}
+\contentsline {section}{\numberline {7.1}\texttt {QuantumFieldGraph.hpp [ffd::qf\_graph]}}{12}{section.7.1}
+\contentsline {subsection}{\numberline {7.1.1}\texttt {class QuantumFieldGraph}}{12}{subsection.7.1.1}
+\contentsline {subsection}{\numberline {7.1.2}\texttt {QuantumFieldGraph::QuantumFieldGraph(QuantumFieldVertex)}}{12}{subsection.7.1.2}
+\contentsline {subsection}{\numberline {7.1.3}\texttt {QuantumFieldGraph::QuantumFieldGraph(QuantumFieldDot)}}{12}{subsection.7.1.3}
+\contentsline {section}{\numberline {7.2}\texttt {operator\_or.hpp}}{12}{section.7.2}
+\contentsline {subsection}{\numberline {7.2.1}\texttt {operator|(QuantumFieldGraph, QuantumFieldGraph) [ffd::user\_space] }}{12}{subsection.7.2.1}
+\contentsline {subsection}{\numberline {7.2.2}\texttt {QuantumFieldGraph::operator|=(QuantumFieldGraph) [ffd::qf\_graph]}}{12}{subsection.7.2.2}
+\contentsline {section}{\numberline {7.3}\texttt {Iterator.hpp [ffd::qf\_graph]}}{13}{section.7.3}
+\contentsline {subsection}{\numberline {7.3.1}\texttt {class QFGraphIterator}}{13}{subsection.7.3.1}
+\contentsline {subsection}{\numberline {7.3.2}\texttt {QFGraphIterator::operator++()}}{13}{subsection.7.3.2}
+\contentsline {subsection}{\numberline {7.3.3}\texttt {QFGraphIterator::operator+(int)}}{13}{subsection.7.3.3}
+\contentsline {subsection}{\numberline {7.3.4}\texttt {QFGraphIterator::NotEnd()}}{13}{subsection.7.3.4}
+\contentsline {subsection}{\numberline {7.3.5}\texttt {QFGraphIterator::operator()()}}{13}{subsection.7.3.5}
+\contentsline {chapter}{\numberline {8}\texttt {FeynmanEdge/}}{14}{chapter.8}
+\contentsline {section}{\numberline {8.1}\texttt {FeynmanEdge.hpp [ffd::feynman\_edge]}}{14}{section.8.1}
+\contentsline {subsection}{\numberline {8.1.1}\texttt {QuantumFieldVertexDot}}{14}{subsection.8.1.1}
+\contentsline {subsection}{\numberline {8.1.2}\texttt {QuantumFieldPosition}}{14}{subsection.8.1.2}
+\contentsline {subsection}{\numberline {8.1.3}\texttt {FeynmanEdge}}{15}{subsection.8.1.3}
+\contentsline {subsection}{\numberline {8.1.4}\texttt {PairQuantumFieldPosition}}{15}{subsection.8.1.4}
+\contentsline {subsection}{\numberline {8.1.5}\texttt {FeynmanEdgeMap<Field>}}{15}{subsection.8.1.5}
+\contentsline {section}{\numberline {8.2}\texttt {CreateFeynmanEdgeMap.hpp [ffd::user\_space]}}{15}{section.8.2}
+\contentsline {subsection}{\numberline {8.2.1}\texttt {CreateFeynmanEdgeMap(QuantumFieldGraph, drawer\_, WhichBlock\_)}}{15}{subsection.8.2.1}
+\contentsline {chapter}{\numberline {9}\texttt {WickFunction/}}{16}{chapter.9}
+\contentsline {section}{\numberline {9.1}\texttt {WickFunction.hpp [ffd::wick\_function]}}{16}{section.9.1}
+\contentsline {subsection}{\numberline {9.1.1}\texttt {class WickFunction}}{16}{subsection.9.1.1}
+\contentsline {subsection}{\numberline {9.1.2}\texttt {WickFunction::WhichBlock}}{16}{subsection.9.1.2}
+\contentsline {subsection}{\numberline {9.1.3}\texttt {WickFunction::Sign}}{16}{subsection.9.1.3}
+\contentsline {subsection}{\numberline {9.1.4}\texttt {WickFunction::BlockNumbers}}{16}{subsection.9.1.4}
+\contentsline {subsection}{\numberline {9.1.5}\texttt {WickFunction::IsFermionicBlock}}{17}{subsection.9.1.5}
+\contentsline {subsection}{\numberline {9.1.6}\texttt {WickFunction::WickFunction(WhichBlock\_)}}{17}{subsection.9.1.6}
+\contentsline {section}{\numberline {9.2}\texttt {operator\_mul.hpp [ffd::wick\_function]}}{17}{section.9.2}
+\contentsline {subsection}{\numberline {9.2.1}\texttt {WickFunction::operator*=(\{QuantumFieldVertex, int\})}}{17}{subsection.9.2.1}
+\contentsline {chapter}{\numberline {10}\texttt {WickMatrix/}}{18}{chapter.10}
+\contentsline {section}{\numberline {10.1}\texttt {WickMatrix.hpp [ffd::wick\_matrix]}}{18}{section.10.1}
+\contentsline {subsection}{\numberline {10.1.1}\texttt {class WickMatrix<Field>}}{18}{subsection.10.1.1}
+\contentsline {section}{\numberline {10.2}\texttt {WickMatrixWickMatrix.hpp [ffd::wick\_matrix]}}{18}{section.10.2}
+\contentsline {subsection}{\numberline {10.2.1}\texttt {WickMatrix::WickMatrix()}}{18}{subsection.10.2.1}
+\contentsline {subsection}{\numberline {10.2.2}\texttt {WickMatrix::WickMatrix(QuantumField, int)}}{18}{subsection.10.2.2}
+\contentsline {subsection}{\numberline {10.2.3}\texttt {WickMatrix::WickMatrix(QuantumFieldProduct, int)}}{19}{subsection.10.2.3}
+\contentsline {section}{\numberline {10.3}\texttt {operator\_par.hpp [ffd::wick\_matrix]}}{19}{section.10.3}
+\contentsline {subsection}{\numberline {10.3.1}\texttt {WickMatrix::operator()(int, int) const}}{19}{subsection.10.3.1}
+\contentsline {subsection}{\numberline {10.3.2}\texttt {WickMatrix::operator()(int, int, const char*)}}{19}{subsection.10.3.2}
+\contentsline {section}{\numberline {10.4}\texttt {CreateWickMatrices.hpp [ffd::user\_space]}}{19}{section.10.4}
+\contentsline {subsection}{\numberline {10.4.1}\texttt {CreateWickMatrices(WickFunction, FeynmanEdgeMap)}}{19}{subsection.10.4.1}

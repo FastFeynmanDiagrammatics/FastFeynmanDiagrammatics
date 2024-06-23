@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\begin{document}
+\section{Characteristic polynomial as Principal Minors}
+Let
+\begin{equation}\label{}
+ p(\lambda)= \det\left(A+\lambda \mathbb{I} \right)=\sum_{k=0}^n p_k\,\lambda^k
+\end{equation}
+One has
+\begin{equation}\label{}
+p_k=\sum_{S\subseteq\{0,\dots,n-1\},\,|S|=k} P(S)
+\end{equation}
+where $P(S)$ is the principal minor of the matrix $A$ computed with the subset $S$. 
+\section{Alpha shift}
+We consider an hamiltonian of the form
+\begin{equation}\label{}
+  \hat{H}=\hat{H}_{\text{hopping}}
+  -\mu_0\hat{N}
+  +U\sum
+  \left(\hat{n}_\uparrow-n_{0,\uparrow}/2-\alpha\right)
+  \left(\hat{n}_\downarrow-n_{0,\downarrow}-\alpha\right)
+\end{equation}
+where $\alpha$ is an arbitrary real number. We write for a general quantity
+\begin{equation}\label{}
+f[[\xi]]=\frac{A[[\xi]]}{Z[[\xi]]}
+\end{equation}
+where
+\begin{equation}\label{}
+Z(S) = (-1)^{|S|}\left(\det_S \mathbb{G}_0(\alpha)\right)^2
+\end{equation}
+The matrix $\mathbb{G}_0(\alpha)$ has $-\alpha$ on the diagonal.
+Let us define
+\begin{equation}\label{}
+P_{\emptyset}(S) := \det_S \mathbb{G}_0(\alpha=0)
+\end{equation}
+Then, one has
+\begin{equation}\label{}
+\det_S \mathbb{G}_0(\alpha)   = \sum_{k=0}^n (-\alpha)^{|S|-k}\sum_{S'\subseteq S,\,|S'|=k}P_{\emptyset}(S')
+\end{equation}
+where
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,16 @@
+\chapter{\texttt{CoreMath/}}
+\texttt{CoreMath} contains the definition of \texttt{Real} and \texttt{Complex} numbers (available in the namespace \texttt{ffd} as well as in \texttt{ffd::user\_space}), and some basic set theory operations.
+\section{\texttt{RealComplexNumberRepresentation.hpp} [\texttt{ffd}, \texttt{ffd::user\_space}]}
+\subsection{\texttt{Real}}
+The floating point representation of a real number.
+\subsection{\texttt{Complex}}
+\texttt{Complex} is \texttt{std::complex<Real>}.
+\section{\texttt{BinaryNumberRepresentation.hpp [ffd, ffd::user\_space]}}
+\subsection{\texttt{BinaryInt}}
+\texttt{BinaryInt} is a non-negative natural number used for set manipulations.
+\section{\texttt{SetTheory.hpp [ffd::set\_theory]}}
+It contains basic set-theory functions under the \texttt{ffd::set\_theory} namespace.
+\subsection{\texttt{CardinalitySet(BinaryInt)}}
+It returns the cardinality of the argument.
+\subsection{\texttt{VectorOfBinaryDigitsOf(BinaryInt) [ffd::user\_space]}}
+It returns a \texttt{std::vector<int>} of the binary digits of the argument.

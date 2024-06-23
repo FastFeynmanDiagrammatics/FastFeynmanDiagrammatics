@@ -1,0 +1,41 @@
+\documentclass{article}
+\usepackage{amsmath, amsfonts, fullpage}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\title{Hubbard atom}
+\author{riccardorossi0@protonmail.com}
+\begin{document}
+\maketitle
+We consider
+$$
+\hat{H}=-\mu\sum_{\sigma}\hat{n}_\sigma + U\hat{n}_\uparrow \hat{n}_\downarrow
+$$
+One has
+$$
+Z = 1+2e^{\beta\mu}+e^{2\beta\mu-\beta U}
+$$
+and
+$$
+Z\,G(\tau) = -\text{Tr}\left[e^{-\beta \hat{H}}\;\psi(\tau)\;\bar{\psi}(0)\right]= -e^{\mu\tau}-e^{(\mu-U)\tau}e^{\beta\mu}
+$$
+One has
+$$
+G_{i\omega_n}=\int_0^\beta d\tau\;e^{i\omega_n\tau}G(\tau)=\frac{z_0}{i\omega_n+\mu}+\frac{z_1}{i\omega_n+\mu-U}
+$$
+where
+$$
+z_0 = \frac{1+e^{\beta\mu}}{Z}, \qquad z_0+z_1 = 1
+$$
+The bare propagator is
+$$
+G_{\text{bare},i\omega_n}=\frac{1}{i\omega_n+\mu}
+$$
+One has
+$$
+\Sigma_{i\omega_n}=\frac{z_0\,z_1\,U^2}{i\omega_n+\mu-z_0\,U}
+$$
+\end{document}
