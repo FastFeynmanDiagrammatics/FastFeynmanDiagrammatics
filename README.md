@@ -1,6 +1,7 @@
-Authors: Riccardo Rossi and Fedor Šimkovic IV
-
 # FastFeynmanDiagrammatics: self-energy and susceptibility codes
+
+*Authors: Riccardo Rossi and Fedor Šimkovic IV*
+
 This code has been used to obtain the numerical results of the paper [https://arxiv.org/abs/2209.09237](https://arxiv.org/abs/2209.09237).
 
 ## Location of the codes and important files
@@ -35,4 +36,5 @@ ffd/postprocessing/mergeruns_fix_density.cpp
 The self-energy and the susceptibility codes have similar usage and conventions.
 
 ## System requirements
+
 - A C++ compiler with a standard of at least C++20
