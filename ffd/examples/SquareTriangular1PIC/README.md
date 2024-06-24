@@ -1,17 +1,13 @@
 Authors: Riccardo Rossi and Fedor Šimkovic IV
 
 # FastFeynmanDiagrammatics: self-energy code
+
 ## What does the code compute?
-### Overview
+
 The codes outputs the self-energy on a certain momentum-frequency grid.
 
-### A rough sketch of the output
-The code outputs stochastic estimates of
-$$
-\Sigma_{j,l}(\mathbf{k},i\omega_n)
-$$
-where $\Sigma_{j,l}(\mathbf{k},i\omega_n)$ is the $j$-th insertion of $U$ and $l$-th insertion of a chemical potential shift (which this code assumes of order $U$). This data can be used to compute quantities at fixed density by inserting the right chemical potential shift in the post-processing. 
-## The model
+### The model
+
 We consider, for the purpose of this file, the Hubbard model
 $$
 \hat{H}=\hat{H}_0+ U \sum_i n_{i\uparrow}n_{i\downarrow}
@@ -20,6 +16,15 @@ where
 $$
 \hat{H}_0=-t\sum_{<i,j>}c_i^\dagger c_j  -t'\sum_{<<i,j>>}c_i^\dagger c_j + h.c.
 $$
+
+
+### A rough sketch of the output
+
+The code outputs stochastic estimates of
+$$
+\Sigma_{j,l}(\mathbf{k},i\omega_n)
+$$
+where $$\Sigma_{j,l}(\mathbf{k},i\omega_n)$$ is the $$j$$-th insertion of $$U$$ and $$l$$-th insertion of a chemical potential shift (which this code assumes of order $$U$$). This data can be used to compute quantities at fixed density by inserting the right chemical potential shift in the post-processing. 
 
 ## Important files
 
@@ -37,19 +42,36 @@ ffd/postprocessing/mergeruns_fix_density.cpp
 
 
 ## Compilation
+
 ### System requirements
+
 - A C++ compiler with a standard of at least C++20
 
-### Minimal compilation line for gcc
+### Running the code
 
-`$cd ffd/examples/SquareTriangular1PIC/main.cpp`
+```
+$mkdir build; cd build
+```
+```
+$cmake ..
+```
+```
+$cmake --build .
+```
+```
+$./main.x
+```
+The output is saved in the `out` folder.
 
-`$g++ -std=c++20 -O3 -DNDEBUG -march=native -I ../../.. main.cpp -o main.x`
-This will create the executable `main.x`
+
 ## Parameters of the codes
+
 ### Location
+
 The parameters are in the file `parameters.hpp`
+
 ### Physical parameters
+
 For both codes
 $$
 \texttt{Beta} = \beta= \text{"Inverse temperature"}
@@ -82,6 +104,7 @@ $$
 $$
 
 ### Important numerical parameters
+
 $$
 \texttt{k\_slice} = \text{type of momentum accumulation}
 $$
@@ -144,6 +167,7 @@ so the format is order-in-U   order-in-chemical-potential-shift   value    error
 These `.ds` files are rough files: they need to be merged together , **at postprocessing**, to create a result for each PID (the two 34 and the two 39 will be merged together), and then the result from each process will be merged together to create a single file with values and errorbars for each coefficients.
 
 ### Changing parameters
+
 1. Always increase the PID counter `pid_counter` in `parameters.hpp`
 2. Change the other parameters as needed
 3. Recompile the code
@@ -158,8 +182,10 @@ These `.ds` files are rough files: they need to be merged together , **at postpr
    ```
 where `nnodes` are the number of nodes and `ncores` is the number of threads per node (can be higher than the number of cores by a factor of 2 in some cases). Each thread will write files independently: **no MPI needed**.
 
-## Gathering data and analysis 
+## Gathering data and analysis
+
 ### Data gathering
+
 A script is provided, `ffd/postprocessing/mergeruns_fix_density.cpp`, to perform the postprocessing data gathering in the `out` folder.
 After compiling `mergeruns_fix_density.cpp`, calling the executable `mergeruns_fix_density.x`, it can prepare recursively any folder by 
 ```
@@ -170,3 +196,6 @@ or it can also be launched recursively on everything starting from current folde
 ./mergeruns_fix_density.x -v --fix-density *
 ```
 
+### Resummation
+
+The series coefficients can also be futher resummed (code not provided here).

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
-add_definitions(-DFFD_UNIT_TEST_FLAG)
+add_compile_definitions(FFD_UNIT_TEST_FLAG)
 project(unittest)
 include_directories("${CMAKE_SOURCE_DIR}/..")
 add_executable(unittest.x UnitTest.cpp)
